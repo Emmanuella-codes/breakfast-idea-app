@@ -1,7 +1,3 @@
-import "../styles/globals.css";
-import type { AppProps } from "next/app";
-import { ChakraProvider, extendTheme } from "@chakra-ui/react";
-
 import firebase from "firebase/app";
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
@@ -20,22 +16,4 @@ export const clientCredentials = {
 firebase.initializeApp(clientCredentials);
 // const analytics = getAnalytics(firebase);
 
-/* const colors = {
-  brand: {
-    900: '#1a365d',
-    800: '#153e75',
-    700: '#2a69ac',
-  },
-}
-
-const theme = extendTheme({ colors }) */
-
-const App: React.FC<AppProps> = ({ Component, pageProps }) => {
-  return (
-    <ChakraProvider /* theme={theme} */>
-      <Component {...pageProps} />
-    </ChakraProvider>
-  );
-};
-
-export default App;
+export default firebase;

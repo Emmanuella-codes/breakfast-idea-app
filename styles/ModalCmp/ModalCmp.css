@@ -1,0 +1,19 @@
+.ReactModal__Overlay {
+  background: rgba(34, 36, 44, 0.5) !important;
+  backdrop-filter: blur(20px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+.ReactModal__Content--after-open {
+  overflow-y: scroll !important;
+  max-height: 80%;
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  scrollbar-width: none; /* Firefox */
+}
+
+.ReactModal__Content--after-open::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
+}

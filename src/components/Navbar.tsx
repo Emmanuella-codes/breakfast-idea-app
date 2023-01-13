@@ -13,6 +13,7 @@ import {
   useDisclosure,
   useColorModeValue,
   Stack,
+  Image,
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 
@@ -22,25 +23,29 @@ const Navbar = () => {
   return (
     <>
       <Box bg="#e5989b" px={4}>
-        <Flex h={16} alignItems={"center"} justifyContent={"flex-end"}>
-          <IconButton
+        <Flex h={16} alignItems={"center"} justifyContent={""}>
+          {/* <IconButton
             size={"md"}
             icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
             aria-label={"Open Menu"}
             display={{ md: "none" }}
             onClick={isOpen ? onClose : onOpen}
-          />
+          /> */}
           <HStack spacing={8} alignItems={"center"}>
             <HStack
               as={"nav"}
               spacing={4}
-              display={{ base: "none", md: "flex" }}
+              display="flex" /* {{ base: "none", md: "flex" }} */
+              fontSize="3xl"
+              mt={"2"}
+              ml={{ base: "-34px", md: "0" }}
             >
-              <Link href="/">Home</Link>
-              <Link href="/about">About</Link>
+              <Link href="/">
+                <Image src="/Logo.png" w="32%" alt="logo" />
+              </Link>
             </HStack>
           </HStack>
-          <Flex alignItems={"center"}>
+          {/* <Flex alignItems={"center"}>
             <Menu>
               <MenuList>
                 <MenuItem>Link 1</MenuItem>
@@ -48,17 +53,18 @@ const Navbar = () => {
                 <MenuItem>Link 3</MenuItem>
               </MenuList>
             </Menu>
-          </Flex>
+          </Flex> */}
         </Flex>
 
-        {isOpen ? (
+        {/* {isOpen ? (
           <Box pb={4} display={{ md: "none" }}>
             <Stack as={"nav"} spacing={4}>
-              <Link href="/">Home</Link>
-              <Link href="/about">About</Link>
+              <Link href="/">
+                <Image src="/Logo.png" alt="logo" />
+              </Link>
             </Stack>
           </Box>
-        ) : null}
+        ) : null} */}
       </Box>
     </>
   );

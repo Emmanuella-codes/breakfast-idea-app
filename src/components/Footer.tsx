@@ -4,7 +4,7 @@ const Footer = () => {
   return (
     <>
       <Box>
-        <Text color="#000">Built with ❤️ by Emmanuella ✨</Text>
+        <Text color="gray.500">Built with ❤️ by Emmanuella ✨</Text>
       </Box>
     </>
   );

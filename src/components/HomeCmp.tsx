@@ -10,7 +10,8 @@ import {
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import AboutUs from "./AboutUs";
-import ActionModal from "./modals/ActionModal";
+import LoginModal from "./modals/LoginModal";
+import ActionModal from "./modals/SignupModal";
 // import LoginModal from "./modals/LoginModal";
 // import SignupModal from "./modals/SignupModal";
 
@@ -135,7 +136,7 @@ const HomeCmp = () => {
         </Flex>
         <AboutUs />
         <Box display={"flex"}>
-          <ActionModal
+          <LoginModal
             isOpen={openLoginModal}
             onRequestClose={() => {
               setOpenLoginModal(false);

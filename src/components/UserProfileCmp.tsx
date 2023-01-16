@@ -1,9 +1,26 @@
-import React from 'react'
+import { Box } from "@chakra-ui/react";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import React, { useEffect, useState } from "react";
 
-const UserProfileCmp = () => {
-  return (
-    <div>UserProfileCmp</div>
-  )
+interface IUSERPROFILE {
+  userID: string;
 }
 
-export default UserProfileCmp
+const UserProfileCmp: React.FC<IUSERPROFILE> = ({ userID }) => {
+  const [user, setUser] = useState(null);
+  const auth = getAuth();
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      setUser(user);
+    });
+  }, [auth]);
+
+  return (
+    <>
+      (user && (<Box></Box>
+      ))
+    </>
+  );
+};
+
+export default UserProfileCmp;

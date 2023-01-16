@@ -9,7 +9,7 @@ import "firebase/auth";
 import "firebase/firestore";
 
 export const clientCredentials = {
-  apikey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEYNEXT_PUBLIC_FIREBASE_API_KEY,
   authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
   projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
   storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
@@ -17,8 +17,8 @@ export const clientCredentials = {
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
 
-firebase.initializeApp(clientCredentials);
-// const analytics = getAnalytics(firebase);
+export const firebaseAppSetup = initializeApp(clientCredentials);
+// export const analytics = getAnalytics(firebaseApp);
 
 /* const colors = {
   brand: {

@@ -8,8 +8,18 @@ import {
   Input,
 } from "@chakra-ui/react";
 import ModalCmp from "./ModalCmp";
+import "firebase/auth";
+import * as yup from "yup";
+import { FORMVALIDATOR } from "validator/FormValidator";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+} from "firebase/auth";
+import { useFormik } from "formik";
+import { FormikProvider } from "formik/dist/FormikContext";
 
-const ActionModal: React.FC<{
+const LoginModal: React.FC<{
   isOpen: boolean;
   onRequestClose: () => void;
   maxWidth: string;
@@ -32,7 +42,33 @@ const ActionModal: React.FC<{
   yesAction,
   noAction,
 }) => {
-  //   const [isLowerthan316] = useMediaQuery("(max-width:316px)");
+  const validationSchema = yup.object().shape(FORMVALIDATOR);
+  const auth = getAuth();
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    validationSchema,
+    onSubmit: async (values) => {
+      try {
+        await signInWithEmailAndPassword(auth, values.email, values.password)
+          .then((userCredential) => {
+            const user = userCredential.user;
+          })
+          .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+          })
+          .finally(() => {
+            formik.setSubmitting(false);
+          });
+      } catch (error) {
+        console.log(error);
+      }
+    },
+  });
+
   return (
     <>
       <ModalCmp
@@ -72,16 +108,32 @@ const ActionModal: React.FC<{
           >
             {actionDesc}
           </Text>
-          <Stack spacing={4}>
-            <FormControl id="email">
-              <FormLabel>Email address</FormLabel>
-              <Input type="email" />
-            </FormControl>
-            <FormControl id="password">
-              <FormLabel>Password</FormLabel>
-              <Input type="password" />
-            </FormControl>
-          </Stack>
+          <>
+            <form onSubmit={formik.handleSubmit}>
+              <Stack spacing={4}>
+                <FormControl id="email">
+                  <FormLabel htmlFor="email">Email address</FormLabel>
+                  <Input
+                    id="email"
+                    type="email"
+                    name="email"
+                    onChange={formik.handleChange}
+                    value={formik.values.email}
+                  />
+                </FormControl>
+                <FormControl id="password">
+                  <FormLabel htmlFor="password">Password</FormLabel>
+                  <Input
+                    id="password"
+                    type="password"
+                    name="password"
+                    onChange={formik.handleChange}
+                    value={formik.values.password}
+                  />
+                </FormControl>
+              </Stack>
+            </form>
+          </>
           <Flex
             alignItems={"center"}
             justifyContent={"space-around"}
@@ -107,4 +159,4 @@ const ActionModal: React.FC<{
   );
 };
 
-export default ActionModal;
+export default LoginModal;

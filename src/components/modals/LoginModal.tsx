@@ -18,6 +18,7 @@ import {
 } from "firebase/auth";
 import { useFormik } from "formik";
 import { FormikProvider } from "formik/dist/FormikContext";
+import { useRouter } from "next/router";
 
 const LoginModal: React.FC<{
   isOpen: boolean;
@@ -44,6 +45,7 @@ const LoginModal: React.FC<{
 }) => {
   const validationSchema = yup.object().shape(FORMVALIDATOR);
   const auth = getAuth();
+  const router = useRouter()
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -62,6 +64,7 @@ const LoginModal: React.FC<{
           })
           .finally(() => {
             formik.setSubmitting(false);
+            router.push("user/[userID].tsx")
           });
       } catch (error) {
         console.log(error);
@@ -108,51 +111,52 @@ const LoginModal: React.FC<{
           >
             {actionDesc}
           </Text>
-          <>
-            <form onSubmit={formik.handleSubmit}>
-              <Stack spacing={4}>
-                <FormControl id="email">
-                  <FormLabel htmlFor="email">Email address</FormLabel>
-                  <Input
-                    id="email"
-                    type="email"
-                    name="email"
-                    onChange={formik.handleChange}
-                    value={formik.values.email}
-                  />
-                </FormControl>
-                <FormControl id="password">
-                  <FormLabel htmlFor="password">Password</FormLabel>
-                  <Input
-                    id="password"
-                    type="password"
-                    name="password"
-                    onChange={formik.handleChange}
-                    value={formik.values.password}
-                  />
-                </FormControl>
-              </Stack>
-            </form>
-          </>
-          <Flex
-            alignItems={"center"}
-            justifyContent={"space-around"}
-            gap="20px"
-            pt="2rem"
-          >
-            <Text cursor={"pointer"} onClick={yesAction}>
-              {yesText}
-            </Text>
-            <Box
-              cursor={"pointer"}
-              bgColor={"#4E9060"}
-              borderRadius="18px"
-              p="0.8rem 1rem"
-              onClick={noAction}
+
+          <form onSubmit={formik.handleSubmit}>
+            <Stack spacing={4}>
+              <FormControl id="email">
+                <FormLabel htmlFor="email">Email address</FormLabel>
+                <Input
+                  id="email"
+                  type="email"
+                  name="email"
+                  onChange={formik.handleChange}
+                  value={formik.values.email}
+                />
+              </FormControl>
+              <FormControl id="password">
+                <FormLabel htmlFor="password">Password</FormLabel>
+                <Input
+                  id="password"
+                  type="password"
+                  name="password"
+                  onChange={formik.handleChange}
+                  value={formik.values.password}
+                />
+              </FormControl>
+            </Stack>
+
+            <Flex
+              alignItems={"center"}
+              justifyContent={"space-around"}
+              gap="20px"
+              pt="2rem"
             >
-              {noText}
-            </Box>
-          </Flex>
+              <Box></Box>
+              <Text cursor={"pointer"} onClick={yesAction}>
+                {yesText}
+              </Text>
+              <Box
+                cursor={"pointer"}
+                bgColor={"#4E9060"}
+                borderRadius="18px"
+                p="0.8rem 1rem"
+                onClick={noAction}
+              >
+                {noText}
+              </Box>
+            </Flex>
+          </form>
         </Box>
       </ModalCmp>
     </>

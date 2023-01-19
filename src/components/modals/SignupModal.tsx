@@ -1,11 +1,13 @@
 import {
   Box,
+  Button,
   Text,
   Flex,
   Stack,
   FormControl,
   FormLabel,
   Input,
+  useToast,
 } from "@chakra-ui/react";
 import ModalCmp from "./ModalCmp";
 import "firebase/auth";
@@ -17,7 +19,9 @@ import {
   onAuthStateChanged,
 } from "firebase/auth";
 import { useFormik } from "formik";
-import { FormikProvider } from "formik/dist/FormikContext";
+import { initFirebase } from "../../../pages/_app";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 
 const ActionModal: React.FC<{
   isOpen: boolean;
@@ -28,8 +32,6 @@ const ActionModal: React.FC<{
   actionDesc: string;
   yesText: string;
   noText: string;
-  yesAction: () => void;
-  noAction: () => void;
 }> = ({
   isOpen,
   onRequestClose,
@@ -39,11 +41,21 @@ const ActionModal: React.FC<{
   actionDesc,
   yesText,
   noText,
-  yesAction,
-  noAction,
 }) => {
+  const toast = useToast({
+    position: "top",
+    containerStyle: {
+      zIndex: 9,
+    },
+  });
+  const [signedIn, setSignedIn] = useState(false);
+  const [userDetails, setUserDetails] = useState(null);
+  // page loading state
+  /* const [pageLoading, setPageLoading] = useState(false); */
   const validationSchema = yup.object().shape(FORMVALIDATOR);
+  initFirebase();
   const auth = getAuth();
+  const router = useRouter();
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -60,10 +72,23 @@ const ActionModal: React.FC<{
         )
           .then((userCredential) => {
             const user = userCredential.user;
+            setSignedIn(true);
+            toast({
+              status: "success",
+              description: "Signed in successfully",
+            });
+            router.push({
+              pathname: "/user/[userID]",
+              query: { userID: user.uid },
+            });
           })
           .catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;
+            toast({
+              status: "error",
+              description: errorMessage,
+            });
           })
           .finally(() => {
             formik.setSubmitting(false);
@@ -73,6 +98,13 @@ const ActionModal: React.FC<{
       }
     },
   });
+
+  useEffect(() => {
+    const userData = onAuthStateChanged(auth, (user) => {
+      setUserDetails(user);
+    });
+    return userData;
+  }, [auth]);
 
   return (
     <>
@@ -147,27 +179,38 @@ const ActionModal: React.FC<{
                   />
                 </FormControl>
               </Stack>
+              <Flex
+                alignItems={"center"}
+                justifyContent={"space-around"}
+                gap="20px"
+                pt="2rem"
+              >
+                <Box
+                  as={Button}
+                  cursor={"pointer"}
+                  type="submit"
+                  bgColor={"#4E9060"}
+                  p="0.8rem 1rem"
+                  borderRadius="18px"
+                  isLoading={formik.isSubmitting}
+                  isDisabled={formik.isValid ? false : true}
+                  onClick={() => formik.handleSubmit}
+                >
+                  {yesText}
+                </Box>
+
+                <Box
+                  cursor={"pointer"}
+                  bgColor={"red.600"}
+                  borderRadius="18px"
+                  p="0.8rem 1rem"
+                  onClick={onRequestClose}
+                >
+                  {noText}
+                </Box>
+              </Flex>
             </form>
           </>
-          <Flex
-            alignItems={"center"}
-            justifyContent={"space-around"}
-            gap="20px"
-            pt="2rem"
-          >
-            <Text cursor={"pointer"} onClick={yesAction}>
-              {yesText}
-            </Text>
-            <Box
-              cursor={"pointer"}
-              bgColor={"#4E9060"}
-              borderRadius="18px"
-              p="0.8rem 1rem"
-              onClick={noAction}
-            >
-              {noText}
-            </Box>
-          </Flex>
         </Box>
       </ModalCmp>
     </>

@@ -7,7 +7,7 @@ const UserProfileLayout = () => {
   return (
     <Box display={"flex"} flexDir={"column"}>
       <Navbar />
-      <UserProfileCmp userID={""} />
+      <UserProfileCmp />
       <Box pos={"relative"} bottom="0" m="auto">
         <Footer />
       </Box>

@@ -8,7 +8,7 @@ import { getAnalytics } from "firebase/analytics";
 import "firebase/auth";
 import "firebase/firestore";
 
-export const clientCredentials = {
+const clientCredentials = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEYNEXT_PUBLIC_FIREBASE_API_KEY,
   authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
   projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
@@ -17,8 +17,14 @@ export const clientCredentials = {
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
 
+//initialize firebase
 export const firebaseAppSetup = initializeApp(clientCredentials);
 // export const analytics = getAnalytics(firebaseApp);
+
+// export function to initialize firebase
+export const initFirebase = () => {
+  return firebaseAppSetup;
+};
 
 /* const colors = {
   brand: {

@@ -49,6 +49,7 @@ const HomeCmp = () => {
             rounded={"full"}
             px={6}
             bg="#000"
+            color="#FFF"
             _hover={{ bg: "#615e5e" }}
             onClick={() => {
               setOpenLoginModal(true);
@@ -60,6 +61,7 @@ const HomeCmp = () => {
             rounded={"full"}
             px={6}
             bg="#2085ba"
+            color="#FFF"
             _hover={{ bg: "#175e83" }}
             onClick={() => {
               setOpenSignupModal(true);
@@ -146,10 +148,6 @@ const HomeCmp = () => {
             actionDesc={"Login to continue enjoying our cool features"}
             yesText={"LOGIN"}
             noText={"CANCEL"}
-            yesAction={() => {}}
-            noAction={() => {
-              setOpenLoginModal(false);
-            }}
           />
         </Box>
         <Box>
@@ -163,10 +161,6 @@ const HomeCmp = () => {
             actionDesc={"Sign up to enjoy our cool featues"}
             yesText={"SIGNUP"}
             noText={"CANCEL"}
-            yesAction={() => {}}
-            noAction={() => {
-              setOpenSignupModal(false);
-            }}
           />
         </Box>
       </Container>

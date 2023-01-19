@@ -6,6 +6,7 @@ import {
   FormControl,
   FormLabel,
   Input,
+  Button,
 } from "@chakra-ui/react";
 import ModalCmp from "./ModalCmp";
 import "firebase/auth";
@@ -19,6 +20,7 @@ import {
 import { useFormik } from "formik";
 import { FormikProvider } from "formik/dist/FormikContext";
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 
 const LoginModal: React.FC<{
   isOpen: boolean;
@@ -29,8 +31,6 @@ const LoginModal: React.FC<{
   actionDesc: string;
   yesText: string;
   noText: string;
-  yesAction: () => void;
-  noAction: () => void;
 }> = ({
   isOpen,
   onRequestClose,
@@ -40,12 +40,15 @@ const LoginModal: React.FC<{
   actionDesc,
   yesText,
   noText,
-  yesAction,
-  noAction,
 }) => {
+  const [, setLoggedIn] = useState(false);
+  const [, setUserDetails] = useState(null);
+  // page loading state
+  /* const [pageLoading, setPageLoading] = useState(false); */
+
   const validationSchema = yup.object().shape(FORMVALIDATOR);
   const auth = getAuth();
-  const router = useRouter()
+  const router = useRouter();
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -57,6 +60,11 @@ const LoginModal: React.FC<{
         await signInWithEmailAndPassword(auth, values.email, values.password)
           .then((userCredential) => {
             const user = userCredential.user;
+            setLoggedIn(true);
+            router.push({
+              pathname: "/user/[userID]",
+              query: { userID: user.uid },
+            });
           })
           .catch((error) => {
             const errorCode = error.code;
@@ -64,13 +72,19 @@ const LoginModal: React.FC<{
           })
           .finally(() => {
             formik.setSubmitting(false);
-            router.push("user/[userID].tsx")
           });
       } catch (error) {
         console.log(error);
       }
     },
   });
+
+  useEffect(() => {
+    const userData = onAuthStateChanged(auth, (user) => {
+      setUserDetails(user);
+    });
+    return userData;
+  }, [auth]);
 
   return (
     <>
@@ -122,6 +136,7 @@ const LoginModal: React.FC<{
                   name="email"
                   onChange={formik.handleChange}
                   value={formik.values.email}
+                  color="#FFF"
                 />
               </FormControl>
               <FormControl id="password">
@@ -135,23 +150,32 @@ const LoginModal: React.FC<{
                 />
               </FormControl>
             </Stack>
-
             <Flex
               alignItems={"center"}
               justifyContent={"space-around"}
               gap="20px"
               pt="2rem"
             >
-              <Box></Box>
-              <Text cursor={"pointer"} onClick={yesAction}>
-                {yesText}
-              </Text>
               <Box
+                as={Button}
                 cursor={"pointer"}
                 bgColor={"#4E9060"}
                 borderRadius="18px"
                 p="0.8rem 1rem"
-                onClick={noAction}
+                type="submit"
+                isLoading={formik.isSubmitting}
+                /* isDisabled={formik.isValid ? false : true} */
+                onClick={() => formik.handleSubmit}
+              >
+                {yesText}
+              </Box>
+
+              <Box
+                cursor={"pointer"}
+                bgColor={"red.600"}
+                borderRadius="18px"
+                p="0.8rem 1rem"
+                onClick={onRequestClose}
               >
                 {noText}
               </Box>

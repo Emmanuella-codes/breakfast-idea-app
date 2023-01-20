@@ -67,8 +67,9 @@ const UserProfileCmp = () => {
           py={{ base: 18, md: 25 }}
         >
           <Heading
-            fontWeight={600}
-            fontSize={{ base: "2xl", sm: "4xl", md: "6xl" }}
+            as="h1"
+            fontWeight={800}
+            fontSize={{ base: "4xl", md: "6xl" }}
             lineHeight={"110%"}
             color="#000"
           >

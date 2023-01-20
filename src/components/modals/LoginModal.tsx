@@ -176,22 +176,29 @@ const LoginModal: React.FC<{
                   as={Button}
                   cursor={"pointer"}
                   bgColor={"#4E9060"}
-                  borderRadius="18px"
+                  borderRadius="15px"
                   p="0.8rem 1rem"
                   type="submit"
                   isLoading={formik.isSubmitting}
                   isDisabled={formik.isValid ? false : true}
                   onClick={() => formik.handleSubmit}
+                  _hover={{
+                    bgColor: "green.500"
+                  }}
                 >
                   {yesText}
                 </Box>
 
                 <Box
+                  as={Button}
                   cursor={"pointer"}
                   bgColor={"red.600"}
-                  borderRadius="18px"
+                  borderRadius="15px"
                   p="0.8rem 1rem"
                   onClick={onRequestClose}
+                  _hover={{
+                    bgColor: "red.800"
+                  }}
                 >
                   {noText}
                 </Box>

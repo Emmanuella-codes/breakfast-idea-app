@@ -17,6 +17,7 @@ import {
   getAuth,
   createUserWithEmailAndPassword,
   onAuthStateChanged,
+  updateProfile,
 } from "firebase/auth";
 import { useFormik } from "formik";
 import { initFirebase } from "../../../pages/_app";
@@ -72,6 +73,15 @@ const ActionModal: React.FC<{
         )
           .then((userCredential) => {
             const user = userCredential.user;
+            updateProfile(auth.currentUser, {
+              displayName: values.firstname,
+            })
+              .then(() => {
+                if (auth.currentUser) {
+                  console.log(auth.currentUser.displayName);
+                }
+              })
+              .catch(() => {});
             setSignedIn(true);
             toast({
               status: "success",

@@ -16,18 +16,19 @@ import React, { useEffect, useState } from "react";
 const UserProfileCmp = () => {
   const [userName, setUserName] = useState(null);
   const auth = getAuth();
-  const { query } = useRouter();
-  const userID = query.userID as string;
+  /* const { query } = useRouter();
+  const userID = query.userID as string; */
   useEffect(() => {
     const userData = onAuthStateChanged(auth, (user) => {
-      if (user && user.uid === userID) {
+      if (user) {
+        console.log(user);
         setUserName(user.displayName);
       } else {
         setUserName(null);
       }
     });
     return () => userData();
-  }, [auth, userID]);
+  }, [auth]);
 
   return (
     <>
@@ -52,13 +53,15 @@ const UserProfileCmp = () => {
         </Box>
         <Box alignItems={"center"} color="#000">
           <form>
-            <FormControl id="email" >
+            <FormControl id="search">
               <Input
                 id="search"
                 type="text"
                 name="search"
                 placeholder="search e.g eggs"
+                _placeholder={{ color: "gray.500" }}
                 color="#000"
+                border="1px solid black"
               />
             </FormControl>
           </form>

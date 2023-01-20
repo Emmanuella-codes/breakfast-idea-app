@@ -81,7 +81,7 @@ const ActionModal: React.FC<{
                   console.log(auth.currentUser.displayName);
                 }
               })
-              .catch(() => {});
+              .catch(() => { });
             setSignedIn(true);
             toast({
               status: "success",

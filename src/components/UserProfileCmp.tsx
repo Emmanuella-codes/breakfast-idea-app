@@ -8,16 +8,43 @@ import {
   Input,
   Stack,
   Text,
+  useToast,
+  Button,
 } from "@chakra-ui/react";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 
 const UserProfileCmp = () => {
+  const toast = useToast({
+    position: "top",
+    containerStyle: {
+      zIndex: 9,
+    },
+  });
   const [userName, setUserName] = useState(null);
   const auth = getAuth();
+  const router = useRouter();
   /* const { query } = useRouter();
   const userID = query.userID as string; */
+  const handleSignOut = () => {
+    signOut(auth)
+      .then(() => {
+        toast({
+          status: "success",
+          description: "Logged out successfully",
+        });
+        router.push("/");
+      })
+      .catch((error) => {
+        const errorMessage = error.message;
+        toast({
+          status: "error",
+          description: errorMessage,
+        });
+      });
+  };
+
   useEffect(() => {
     const userData = onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -49,7 +76,9 @@ const UserProfileCmp = () => {
           </Heading>
         </Stack>
         <Box mb="7" color="#000">
-          <Text>Hello {`${userName}`}</Text>
+          <Text fontSize={{ base: "xl", md: "2xl" }} fontWeight={500}>
+            Hello {`${userName}`},
+          </Text>
         </Box>
         <Box alignItems={"center"} color="#000">
           <form>
@@ -62,14 +91,30 @@ const UserProfileCmp = () => {
                 _placeholder={{ color: "gray.500" }}
                 color="#000"
                 border="1px solid black"
+                w="50%"
               />
             </FormControl>
           </form>
         </Box>
-        <Box mt="7" color="#000">
-          <Text>Favorites</Text>
+        {/* favorites section: user saved recipes will be displayed here */}
+        <Box color="#000">
+          <Box mt="7">
+            <Text as={"h3"} fontSize="2xl">
+              Favorites
+            </Text>
+          </Box>
+          <Flex></Flex>
         </Box>
-        <Flex></Flex>
+        <Box mt={7}>
+          <Box
+            as={Button}
+            bgColor="blue.400"
+            onClick={handleSignOut}
+            _hover={{ bg: "blue.900" }}
+          >
+            LOGOUT
+          </Box>
+        </Box>
       </Container>
     </>
   );

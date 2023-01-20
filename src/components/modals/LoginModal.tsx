@@ -162,6 +162,7 @@ const LoginModal: React.FC<{
                     name="password"
                     onChange={formik.handleChange}
                     value={formik.values.password}
+                    color="#FFF"
                   />
                 </FormControl>
               </Stack>

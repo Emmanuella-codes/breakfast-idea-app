@@ -8,7 +8,7 @@ const UserProfileLayout = () => {
     <Box display={"flex"} flexDir={"column"}>
       <Navbar />
       <UserProfileCmp />
-      <Box pos={"relative"} bottom="0" m="auto">
+      <Box pos={"fixed"} bottom="0" alignSelf="center" mb="3">
         <Footer />
       </Box>
     </Box>

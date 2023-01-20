@@ -17,6 +17,7 @@ import {
   getAuth,
   createUserWithEmailAndPassword,
   onAuthStateChanged,
+  updateProfile,
 } from "firebase/auth";
 import { useFormik } from "formik";
 import { initFirebase } from "../../../pages/_app";
@@ -72,6 +73,15 @@ const ActionModal: React.FC<{
         )
           .then((userCredential) => {
             const user = userCredential.user;
+            updateProfile(auth.currentUser, {
+              displayName: values.firstname,
+            })
+              .then(() => {
+                if (auth.currentUser) {
+                  console.log(auth.currentUser.displayName);
+                }
+              })
+              .catch(() => {});
             setSignedIn(true);
             toast({
               status: "success",
@@ -191,20 +201,27 @@ const ActionModal: React.FC<{
                   type="submit"
                   bgColor={"#4E9060"}
                   p="0.8rem 1rem"
-                  borderRadius="18px"
+                  borderRadius="15px"
                   isLoading={formik.isSubmitting}
                   isDisabled={formik.isValid ? false : true}
                   onClick={() => formik.handleSubmit}
+                  _hover={{
+                    bgColor: "green.500",
+                  }}
                 >
                   {yesText}
                 </Box>
 
                 <Box
+                  as={Button}
                   cursor={"pointer"}
                   bgColor={"red.600"}
-                  borderRadius="18px"
+                  borderRadius="15px"
                   p="0.8rem 1rem"
                   onClick={onRequestClose}
+                  _hover={{
+                    bgColor: "red.800",
+                  }}
                 >
                   {noText}
                 </Box>

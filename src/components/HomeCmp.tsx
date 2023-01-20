@@ -29,8 +29,9 @@ const HomeCmp = () => {
           py={{ base: 18, md: 25 }}
         >
           <Heading
-            fontWeight={600}
-            fontSize={{ base: "2xl", sm: "4xl", md: "6xl" }}
+            as={"h1"}
+            fontWeight={800}
+            fontSize={{ base: "4xl", md: "6xl" }}
             lineHeight={"110%"}
             color="#000"
           >
@@ -47,7 +48,7 @@ const HomeCmp = () => {
         <Stack spacing={9} direction={"row"} justifyContent="center">
           <Button
             rounded={"full"}
-            px={6}
+            p="0.8rem 1rem"
             bg="#000"
             color="#FFF"
             _hover={{ bg: "#615e5e" }}
@@ -59,7 +60,7 @@ const HomeCmp = () => {
           </Button>
           <Button
             rounded={"full"}
-            px={6}
+            p="0.8rem 1rem"
             bg="#2085ba"
             color="#FFF"
             _hover={{ bg: "#175e83" }}
@@ -72,11 +73,13 @@ const HomeCmp = () => {
         </Stack>
         <Box mt="7">
           <Box
-            bg={"#b5838d"}
+            /* bg={"#b5838d"} */
+            border={"1px solid grey"}
             w={{ base: "45%", md: "25%" }}
             m={"auto"}
             p="2"
             borderRadius={"10px"}
+            color="grey"
           >
             <Text>search e.g beans</Text>
           </Box>

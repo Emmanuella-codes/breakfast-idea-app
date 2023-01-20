@@ -7,7 +7,7 @@ const AboutUs = () => {
       paddingTop="40px"
       spacing="2"
       alignItems="flex-start"
-      color={"gray.500"}
+      color={"gray.600"}
     >
       <Heading as="h2">About us</Heading>
       <Text as="p" fontSize="lg">

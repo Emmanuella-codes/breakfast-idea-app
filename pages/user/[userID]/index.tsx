@@ -1,8 +1,8 @@
 import Head from "next/head";
-import { Inter } from "@next/font/google";
+/* import { Inter } from "@next/font/google"; */
 import UserProfileLayout from "Layout/UserProfileLayout";
 
-const inter = Inter({ subsets: ["latin"] });
+/* const inter = Inter({ subsets: ["latin"] }); */
 
 export default function Home() {
   return (

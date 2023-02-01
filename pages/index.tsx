@@ -11,7 +11,7 @@ const index = () => {
         <title>Breakfast Ideas App</title>
         <meta
           name="description"
-          content="Find delicious and common Nigerian breakfast ideas"
+          content="Find delicious and common breakfast ideas"
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />

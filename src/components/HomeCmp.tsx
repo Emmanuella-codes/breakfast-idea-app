@@ -12,12 +12,23 @@ import React, { useState } from "react";
 import AboutUs from "./AboutUs";
 import LoginModal from "./modals/LoginModal";
 import ActionModal from "./modals/SignupModal";
+import { testGetRecipes } from "../../pages/api/request";
 // import LoginModal from "./modals/LoginModal";
 // import SignupModal from "./modals/SignupModal";
 
 const HomeCmp = () => {
   const [openLoginModal, setOpenLoginModal] = useState(false);
   const [openSignupModal, setOpenSignupModal] = useState(false);
+
+  const breakfastResults = ({ data }) => {
+    return (
+      <Flex>
+        {data.map((item) => (
+          <Box key={item.id}>{item.name}</Box>
+        ))}
+      </Flex>
+    );
+  };
 
   return (
     <>
@@ -166,6 +177,13 @@ const HomeCmp = () => {
             noText={"CANCEL"}
           />
         </Box>
+        <Box bg={"#000"} onClick={testGetRecipes}>
+          click
+        </Box>
+        
+        {/* <Box bg={"#000"} onClick={testNgrok}>
+          click
+        </Box> */}
       </Container>
     </>
   );

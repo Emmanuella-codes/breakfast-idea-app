@@ -3,32 +3,45 @@ import {
   Button,
   Container,
   Flex,
+  FormControl,
   Heading,
   Image,
+  Input,
   Stack,
   Text,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import AboutUs from "./AboutUs";
 import LoginModal from "./modals/LoginModal";
 import ActionModal from "./modals/SignupModal";
-import { testGetRecipes } from "../../pages/api/request";
+import { useFormik } from "formik";
+import { searchByIngredient } from "utils/getRecipes";
+import SampleRecipes from "./SampleRecipes";
+import { useRouter } from "next/router";
 // import LoginModal from "./modals/LoginModal";
 // import SignupModal from "./modals/SignupModal";
 
 const HomeCmp = () => {
   const [openLoginModal, setOpenLoginModal] = useState(false);
   const [openSignupModal, setOpenSignupModal] = useState(false);
+  const [searchRecipes, setSearchRecipes] = useState([]);
 
-  const breakfastResults = ({ data }) => {
-    return (
-      <Flex>
-        {data.map((item) => (
-          <Box key={item.id}>{item.name}</Box>
-        ))}
-      </Flex>
-    );
-  };
+  const router = useRouter();
+
+  const formik = useFormik({
+    initialValues: { searchQuery: "" },
+    onSubmit: (values) => {
+      setSearchRecipes(searchByIngredient(values.searchQuery));
+      router.push({
+        pathname: "/search/[ingredient]",
+        query: { ingredient: values.searchQuery },
+      });
+    },
+  });
+
+  useEffect(() => {
+    console.log(searchRecipes);
+  }, [searchRecipes]);
 
   return (
     <>
@@ -67,7 +80,7 @@ const HomeCmp = () => {
               setOpenLoginModal(true);
             }}
           >
-            Login
+            LOGIN
           </Button>
           <Button
             rounded={"full"}
@@ -79,77 +92,49 @@ const HomeCmp = () => {
               setOpenSignupModal(true);
             }}
           >
-            Signup
+            SIGNUP
           </Button>
         </Stack>
-        <Box mt="7">
-          <Box
-            /* bg={"#b5838d"} */
-            border={"1px solid grey"}
-            w={{ base: "45%", md: "25%" }}
-            m={"auto"}
-            p="2"
-            borderRadius={"10px"}
-            color="grey"
-          >
-            <Text>search e.g beans</Text>
-          </Box>
+        <Box display={"flex"} alignItems="center">
+          <SampleRecipes />
         </Box>
-        <Flex
-          gap="6"
-          mt={"10"}
-          mx="auto"
-          flexDir={{ base: "column", md: "row" }}
-        >
-          <Box
-            bg="#b5838d"
-            px="4"
-            py={{ base: "4", md: "10" }}
-            borderRadius={"20px"}
-            w={{ base: "100%", md: "50%" }}
-          >
-            <Heading as="h2" fontSize="3xl">
-              Pap and Moi Moi
-            </Heading>
-            <Flex flexDir="row" gap="4">
-              <Box>
-                <Text>ingredients:</Text>
-                <Image src="/moi-moi-and-pap.png" alt="meal-pic" />
-                <Text>prepare time: 2hrs</Text>
-              </Box>
-              <Box>
-                <Text>
-                  beans, pepper puree, seasoning , vegetable oil, palm oil, pap,
-                  milk and sugar (optional)
-                </Text>
-              </Box>
-            </Flex>
-          </Box>
-          <Box
-            bg="#b5838d"
-            px="4"
-            py={{ base: "4", md: "10" }}
-            borderRadius={"20px"}
-            w={{ base: "100%", md: "50%" }}
-          >
-            <Heading as="h2" fontSize="3xl">
-              Pap and Akara
-            </Heading>
-            <Flex flexDir="row" gap="4">
-              <Box>
-                <Text>ingredients:</Text>
-                <Image src="/akara-and-pap.png" maxW="3%" alt="meal-pic" />
-                <Text>prepare time: 2hrs</Text>
-              </Box>
-              <Box>
-                <Text>
-                  beans, pepper puree, seasoning , vegetable oil, palm oil, pap,
-                  milk and sugar (optional)
-                </Text>
+        <Box mt="7">
+          <form onSubmit={formik.handleSubmit}>
+            <Flex gap={9} justifyContent="center">
+              <FormControl id="search" w="50%">
+                <Input
+                  id="search"
+                  type="text"
+                  name="searchQuery"
+                  placeholder="search e.g eggs"
+                  _placeholder={{ color: "gray.500" }}
+                  color="#000"
+                  border="1px solid black"
+                  value={formik.values.searchQuery}
+                  onChange={formik.handleChange}
+                />
+              </FormControl>
+              <Box
+                as={Button}
+                cursor={"pointer"}
+                bgColor={"#4E9060"}
+                borderRadius="15px"
+                p="0.8rem 1rem"
+                type="submit"
+                isLoading={formik.isSubmitting}
+                isDisabled={formik.isValid ? false : true}
+                onClick={() => {
+                  formik.handleSubmit;
+                }}
+                _hover={{
+                  bgColor: "green.500",
+                }}
+              >
+                SUBMIT
               </Box>
             </Flex>
-          </Box>
-        </Flex>
+          </form>
+        </Box>
         <AboutUs />
         <Box display={"flex"}>
           <LoginModal
@@ -158,7 +143,7 @@ const HomeCmp = () => {
               setOpenLoginModal(false);
             }}
             maxWidth={"400px"}
-            actionTitle={"Login"}
+            actionTitle={"LOGIN"}
             actionDesc={"Login to continue enjoying our cool features"}
             yesText={"LOGIN"}
             noText={"CANCEL"}
@@ -171,19 +156,12 @@ const HomeCmp = () => {
               setOpenSignupModal(false);
             }}
             maxWidth={"400px"}
-            actionTitle={"Sign Up"}
+            actionTitle={"SIGNUP"}
             actionDesc={"Sign up to enjoy our cool featues"}
             yesText={"SIGNUP"}
             noText={"CANCEL"}
           />
         </Box>
-        <Box bg={"#000"} onClick={testGetRecipes}>
-          click
-        </Box>
-        
-        {/* <Box bg={"#000"} onClick={testNgrok}>
-          click
-        </Box> */}
       </Container>
     </>
   );

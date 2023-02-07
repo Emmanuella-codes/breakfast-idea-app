@@ -8,7 +8,14 @@ export default async function handler(
 ) {
   const { userProfileID } = req.query;
   const { username } = req.query;
-  res.status(200).json({ name: username, userID: userProfileID });
+  const { ingredientData } = req.query;
+  res
+    .status(200)
+    .json({
+      name: username,
+      userID: userProfileID,
+      ingredient: ingredientData,
+    });
 
   //next-cors
   await NextCors(req, res, {

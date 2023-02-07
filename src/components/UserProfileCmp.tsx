@@ -12,8 +12,13 @@ import {
   Button,
 } from "@chakra-ui/react";
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
+import { useFormik } from "formik";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
+import { searchByIngredient, generateRandomRecipe } from "utils/getRecipes";
+import RecipeModal from "components/modals/RecipeModal";
+import { RecipeCardProps } from "./RecipeCmp/RecipeCardCmp";
+import { recipesType } from "utils/recipeData";
 
 const UserProfileCmp = () => {
   const toast = useToast({
@@ -22,7 +27,12 @@ const UserProfileCmp = () => {
       zIndex: 9,
     },
   });
+
   const [userName, setUserName] = useState(null);
+  const [searchRecipes, setSearchRecipes] = useState([]);
+  const [openModal, setOpenModal] = useState(false);
+  const [generatedRecipe, setGeneratedRecipe] = useState<recipesType[]>([]);
+
   const auth = getAuth();
   const router = useRouter();
   /* const { query } = useRouter();
@@ -45,17 +55,34 @@ const UserProfileCmp = () => {
       });
   };
 
+  /*   const handlegeneratedRecipe = () => {
+    const recipe = generateRandomRecipe()
+    setGeneratedRecipe(recipe);
+    setOpenModal(true);
+  }; */
+
+  const formik = useFormik({
+    initialValues: { searchQuery: "" },
+    onSubmit: (values) => {
+      setSearchRecipes(searchByIngredient(values.searchQuery));
+      router.push({
+        pathname: "/search/[ingredient]",
+        query: { ingredient: values.searchQuery },
+      });
+    },
+  });
+
   useEffect(() => {
     const userData = onAuthStateChanged(auth, (user) => {
       if (user) {
-        console.log(user);
         setUserName(user.displayName);
+        console.log(user.displayName);
       } else {
         setUserName(null);
       }
     });
     return () => userData();
-  }, [auth]);
+  }, [auth, searchRecipes]);
 
   return (
     <>
@@ -81,21 +108,67 @@ const UserProfileCmp = () => {
             Hello {`${userName}`},
           </Text>
         </Box>
-        <Box alignItems={"center"} color="#000">
-          <form>
-            <FormControl id="search">
-              <Input
-                id="search"
-                type="text"
-                name="search"
-                placeholder="search e.g eggs"
-                _placeholder={{ color: "gray.500" }}
-                color="#000"
-                border="1px solid black"
-                w="50%"
-              />
-            </FormControl>
+        <Box mt="7">
+          <form onSubmit={formik.handleSubmit}>
+            <Flex gap={9} justifyContent="center">
+              <FormControl id="search" w="50%">
+                <Input
+                  id="search"
+                  type="text"
+                  name="searchQuery"
+                  placeholder="search e.g eggs"
+                  _placeholder={{ color: "gray.500" }}
+                  color="#000"
+                  border="1px solid black"
+                  value={formik.values.searchQuery}
+                  onChange={formik.handleChange}
+                />
+              </FormControl>
+              <Box
+                as={Button}
+                cursor={"pointer"}
+                bgColor={"#4E9060"}
+                borderRadius="15px"
+                p="0.8rem 1rem"
+                type="submit"
+                isLoading={formik.isSubmitting}
+                isDisabled={formik.isValid ? false : true}
+                onClick={() => {
+                  formik.handleSubmit;
+                }}
+                _hover={{
+                  bgColor: "green.500",
+                }}
+              >
+                SUBMIT
+              </Box>
+            </Flex>
           </form>
+        </Box>
+        <Box
+          mt={7}
+          display="flex"
+          flexDir={"row"}
+          justifyContent={"center"}
+          gap={5}
+          alignItems="center"
+        >
+          <Text color="black">You can also click here to generate recipes</Text>
+          <Button
+            bg={"green.400"}
+            color={"white"}
+            rounded={"xl"}
+            boxShadow={"0 5px 20px 0px rgb(72 187 120 / 43%)"}
+            _hover={{
+              bg: "green.500",
+            }}
+            _focus={{
+              bg: "green.500",
+            }}
+            onClick={() => {}}
+          >
+            CLICK HERE
+          </Button>
         </Box>
         {/* favorites section: user saved recipes will be displayed here */}
         <Box color="#000">
@@ -116,6 +189,13 @@ const UserProfileCmp = () => {
             LOGOUT
           </Box>
         </Box>
+        {/* <RecipeModal
+          isOpen={openModal}
+          onRequestClose={() => setOpenModal(false)}
+          maxWidth={""}
+          showCloseIcon={true}
+          recipe={generatedRecipe}
+        /> */}
       </Container>
     </>
   );

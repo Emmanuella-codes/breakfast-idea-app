@@ -1,10 +1,10 @@
 import Head from "next/head";
 /* import { Inter } from "@next/font/google"; */
-import UserProfileLayout from "Layout/UserProfileLayout";
+import SearchRecipesLayout from "Layout/SearchRecipesLayout";
 
 /* const inter = Inter({ subsets: ["latin"] }); */
 
- const UserProfile = () => {
+const SearchRecipesPage = () => {
   return (
     <>
       <Head>
@@ -13,8 +13,8 @@ import UserProfileLayout from "Layout/UserProfileLayout";
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <UserProfileLayout />
+      <SearchRecipesLayout />
     </>
   );
-}
-export default UserProfile
+};
+export default SearchRecipesPage;

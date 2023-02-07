@@ -16,7 +16,7 @@ import LoginModal from "./modals/LoginModal";
 import ActionModal from "./modals/SignupModal";
 import { useFormik } from "formik";
 import { searchByIngredient } from "utils/getRecipes";
-import { recipesType } from "utils/recipeData";
+import SampleRecipes from "./SampleRecipes";
 import { useRouter } from "next/router";
 // import LoginModal from "./modals/LoginModal";
 // import SignupModal from "./modals/SignupModal";
@@ -95,9 +95,12 @@ const HomeCmp = () => {
             SIGNUP
           </Button>
         </Stack>
+        <Box display={"flex"} alignItems="center">
+          <SampleRecipes />
+        </Box>
         <Box mt="7">
           <form onSubmit={formik.handleSubmit}>
-            <Flex gap={9}>
+            <Flex gap={9} justifyContent="center">
               <FormControl id="search" w="50%">
                 <Input
                   id="search"
@@ -132,68 +135,6 @@ const HomeCmp = () => {
             </Flex>
           </form>
         </Box>
-        <Box>
-          {searchRecipes.map((recipes) => (
-            <Box key={recipes.id}>
-              <Text>{recipes.name}</Text>
-            </Box>
-          ))}
-        </Box>
-        <Flex
-          gap="6"
-          mt={"10"}
-          mx="auto"
-          flexDir={{ base: "column", md: "row" }}
-        >
-          <Box
-            bg="#b5838d"
-            px="4"
-            py={{ base: "4", md: "10" }}
-            borderRadius={"20px"}
-            w={{ base: "100%", md: "50%" }}
-          >
-            <Heading as="h2" fontSize="3xl">
-              Pap and Moi Moi
-            </Heading>
-            <Flex flexDir="row" gap="4">
-              <Box>
-                <Text>ingredients:</Text>
-                <Image src="/moi-moi-and-pap.png" alt="meal-pic" />
-                <Text>prepare time: 2hrs</Text>
-              </Box>
-              <Box>
-                <Text>
-                  beans, pepper puree, seasoning , vegetable oil, palm oil, pap,
-                  milk and sugar (optional)
-                </Text>
-              </Box>
-            </Flex>
-          </Box>
-          <Box
-            bg="#b5838d"
-            px="4"
-            py={{ base: "4", md: "10" }}
-            borderRadius={"20px"}
-            w={{ base: "100%", md: "50%" }}
-          >
-            <Heading as="h2" fontSize="3xl">
-              Pap and Akara
-            </Heading>
-            <Flex flexDir="row" gap="4">
-              <Box>
-                <Text>ingredients:</Text>
-                <Image src="/akara-and-pap.png" maxW="3%" alt="meal-pic" />
-                <Text>prepare time: 2hrs</Text>
-              </Box>
-              <Box>
-                <Text>
-                  beans, pepper puree, seasoning , vegetable oil, palm oil, pap,
-                  milk and sugar (optional)
-                </Text>
-              </Box>
-            </Flex>
-          </Box>
-        </Flex>
         <AboutUs />
         <Box display={"flex"}>
           <LoginModal

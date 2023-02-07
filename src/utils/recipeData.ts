@@ -9,7 +9,7 @@ export interface recipesType {
 export const recipes: recipesType[] = [
   {
     id: "1",
-    name: "Fried eggs, Bread and Tea",
+    name: "Fried Eggs, Bread and Tea",
     ingredients: [
       "4 Fresh eggs",
       "50 ml Vegetable oil",

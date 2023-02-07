@@ -4,7 +4,7 @@ import UserProfileLayout from "Layout/UserProfileLayout";
 
 /* const inter = Inter({ subsets: ["latin"] }); */
 
-export default function Home() {
+ const UserProfile = () => {
   return (
     <>
       <Head>
@@ -17,3 +17,4 @@ export default function Home() {
     </>
   );
 }
+export default UserProfile

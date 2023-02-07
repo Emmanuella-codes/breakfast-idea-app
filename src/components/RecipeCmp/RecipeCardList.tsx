@@ -1,7 +1,7 @@
 import RecipeCardCmp from "./RecipeCardCmp";
 import { recipesType } from "utils/recipeData";
 import React, { useState } from "react";
-import { Box, Button, Text } from "@chakra-ui/react";
+import { Box, Button, Flex, Text } from "@chakra-ui/react";
 
 const RecipeCardList: React.FC<{ recipes: recipesType[] }> = ({ recipes }) => {
   const [startIndex, setStartIndex] = useState(0);
@@ -14,17 +14,40 @@ const RecipeCardList: React.FC<{ recipes: recipesType[] }> = ({ recipes }) => {
 
   return (
     <Box>
-      {recipes.slice(startIndex, endIndex).map((recipe) => (
-        <RecipeCardCmp
-          key={recipe.id}
-          recipeName={recipe.name}
-          ingredients={recipe.ingredients}
-          instructions={recipe.instructions}
-          cookTime={recipe.cookTime}
-        />
-      ))}
+      <Flex
+        flexDir={{ base: "row", lg: "row" }}
+        justifyContent={{ md: "space-between" }}
+        maxW=""
+        flexWrap={"wrap"}
+      >
+        {recipes.slice(startIndex, endIndex).map((recipe) => (
+          <RecipeCardCmp
+            key={recipe.id}
+            recipeName={recipe.name}
+            ingredients={recipe.ingredients}
+            instructions={recipe.instructions}
+            cookTime={recipe.cookTime}
+          />
+        ))}
+      </Flex>
       {endIndex < recipes.length && (
-        <Button onClick={handleLoadMore}>Load More</Button>
+        <Box>
+          <Button
+            bg={"green.400"}
+            color={"white"}
+            rounded={"xl"}
+            boxShadow={"0 5px 20px 0px rgb(72 187 120 / 43%)"}
+            _hover={{
+              bg: "green.500",
+            }}
+            _focus={{
+              bg: "green.500",
+            }}
+            onClick={handleLoadMore}
+          >
+            Load More
+          </Button>
+        </Box>
       )}
     </Box>
   );

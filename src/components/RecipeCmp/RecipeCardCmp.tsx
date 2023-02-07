@@ -1,7 +1,16 @@
-import { Box, ListItem, Text, UnorderedList } from "@chakra-ui/react";
-import { TfiAlarmClock } from "react-icons/tfi";
+import {
+  Box,
+  Flex,
+  Icon,
+  ListItem,
+  Text,
+  UnorderedList,
+  Button,
+} from "@chakra-ui/react";
+import { useState } from "react";
+import RecipeModal from "components/modals/RecipeModal";
 
-interface RecipeCardProps {
+export interface RecipeCardProps {
   recipeName: string;
   ingredients: string[];
   instructions: string[];
@@ -14,24 +23,68 @@ const RecipeCardCmp: React.FC<RecipeCardProps> = ({
   instructions,
   cookTime,
 }) => {
+  const [showModal, setShowModal] = useState(false);
+
+  const toggleModal = () => {
+    setShowModal(!showModal);
+  };
+
   return (
-    <Box boxShadow="xl" p="6" rounded="md" bg="white" color={"black"}>
+    <Box
+      boxShadow="2xl"
+      p="6"
+      rounded="md"
+      bg="white"
+      color={"black"}
+      maxW={"400px"}
+      w={"full"}
+      mt={4}
+      mb={6}
+    >
       <Box>
-        <Text>{recipeName}</Text>
+        <Text fontSize={"4xl"} fontWeight={800}>
+          {recipeName}
+        </Text>
       </Box>
-      <Text>Ingredients: </Text>
-      <UnorderedList>
-        {ingredients.map((ingredient) => (
-          <ListItem key={ingredient}>{ingredient}</ListItem>
-        ))}
-      </UnorderedList>
-      <Text>Instructions:</Text>
-      <UnorderedList>
-        {instructions.map((steps) => (
-          <ListItem key={steps}>{steps}</ListItem>
-        ))}
-      </UnorderedList>
-      <Text>{`${(<TfiAlarmClock />)}: ${cookTime} `}</Text>
+      <Box bg={"gray.50"} px={6} py={10} mt={3}>
+        <Text>Ingredients: </Text>
+        <UnorderedList>
+          {ingredients.slice(0, 4).map((ingredient) => (
+            <ListItem key={ingredient}>{ingredient}</ListItem>
+          ))}
+        </UnorderedList>
+        <Box mt={3}>
+          <Button
+            bg={"green.400"}
+            color={"white"}
+            rounded={"xl"}
+            boxShadow={"0 5px 20px 0px rgb(72 187 120 / 43%)"}
+            _hover={{
+              bg: "green.500",
+            }}
+            _focus={{
+              bg: "green.500",
+            }}
+            onClick={() => setShowModal(true)}
+          >
+            Read More
+          </Button>
+        </Box>
+      </Box>
+      <RecipeModal
+        isOpen={showModal}
+        onRequestClose={() => {
+          setShowModal(false);
+        }}
+        maxWidth={"400px"}
+        showCloseIcon={true}
+        recipe={{
+          recipeName,
+          ingredients,
+          instructions,
+          cookTime,
+        }}
+      />
     </Box>
   );
 };

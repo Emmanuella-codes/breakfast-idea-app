@@ -17,6 +17,7 @@ import ActionModal from "./modals/SignupModal";
 import { useFormik } from "formik";
 import { searchByIngredient } from "utils/getRecipes";
 import { recipesType } from "utils/recipeData";
+import { useRouter } from "next/router";
 // import LoginModal from "./modals/LoginModal";
 // import SignupModal from "./modals/SignupModal";
 
@@ -25,20 +26,16 @@ const HomeCmp = () => {
   const [openSignupModal, setOpenSignupModal] = useState(false);
   const [searchRecipes, setSearchRecipes] = useState([]);
 
-  /* const breakfastResults = ({ data }) => {
-    return (
-      <Flex>
-        {data.map((item) => (
-          <Box key={item.id}>{item.name}</Box>
-        ))}
-      </Flex>
-    );
-  }; */
+  const router = useRouter();
 
   const formik = useFormik({
     initialValues: { searchQuery: "" },
     onSubmit: (values) => {
       setSearchRecipes(searchByIngredient(values.searchQuery));
+      router.push({
+        pathname: "/search/[ingredient]",
+        query: { ingredient: values.searchQuery },
+      });
     },
   });
 
@@ -123,7 +120,9 @@ const HomeCmp = () => {
                 type="submit"
                 isLoading={formik.isSubmitting}
                 isDisabled={formik.isValid ? false : true}
-                onClick={() => formik.handleSubmit}
+                onClick={() => {
+                  formik.handleSubmit;
+                }}
                 _hover={{
                   bgColor: "green.500",
                 }}

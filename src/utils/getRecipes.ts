@@ -6,7 +6,6 @@ export const searchByIngredient = (ingredient: string): recipesType[] => {
       text.toLowerCase().includes(ingredient.toLowerCase())
     )
   );
-  console.log(results);
   return results;
 };
 

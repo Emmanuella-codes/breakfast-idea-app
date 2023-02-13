@@ -10,13 +10,13 @@ export const searchByIngredient = (ingredient: string): recipesType[] => {
   return results;
 };
 
-/* export const generateRandomRecipe = (): recipesType[] => {
+export const generateRandomRecipe = (): recipesType[] => {
   const randomRecipe = [recipes[Math.floor(Math.random() * recipes.length)]];
   console.log(randomRecipe);
   return randomRecipe;
-}; */
+};
 
-export const generateRandomRecipe = (): RecipeCardProps => {
+/* export const generateRandomRecipe = (): RecipeCardProps => {
   const randomIndex = Math.floor(Math.random() * recipes.length);
   const randomRecipe = recipes[randomIndex];
   console.log(randomRecipe);
@@ -27,3 +27,4 @@ export const generateRandomRecipe = (): RecipeCardProps => {
     cookTime: randomRecipe.cookTime,
   };
 };
+ */

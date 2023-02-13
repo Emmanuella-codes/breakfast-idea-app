@@ -5,10 +5,10 @@ import UserProfileCmp from "components/UserProfileCmp";
 
 const UserProfileLayout = () => {
   return (
-    <Box display={"flex"} flexDir={"column"}>
+    <Box>
       <Navbar />
       <UserProfileCmp />
-      <Box pos={"fixed"} bottom="0" alignSelf="center" mb="3">
+      <Box  bottom="0" textAlign={"center"}>
         <Footer />
       </Box>
     </Box>

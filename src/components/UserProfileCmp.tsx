@@ -19,6 +19,7 @@ import { searchByIngredient, generateRandomRecipe } from "utils/getRecipes";
 import RecipeModal from "components/modals/RecipeModal";
 import { RecipeCardProps } from "./RecipeCmp/RecipeCardCmp";
 import { recipesType } from "utils/recipeData";
+import RecipeCardCmp from "./RecipeCmp/RecipeCardCmp";
 
 const UserProfileCmp = () => {
   const toast = useToast({
@@ -31,7 +32,12 @@ const UserProfileCmp = () => {
   const [userName, setUserName] = useState(null);
   const [searchRecipes, setSearchRecipes] = useState([]);
   const [openModal, setOpenModal] = useState(false);
-  const [generatedRecipe, setGeneratedRecipe] = useState<recipesType[]>([]);
+  const [generatedRecipe, setGeneratedRecipe] = useState<RecipeCardProps>({
+    recipeName: "",
+    ingredients: [],
+    instructions: [],
+    cookTime: "",
+  });
 
   const auth = getAuth();
   const router = useRouter();
@@ -55,11 +61,16 @@ const UserProfileCmp = () => {
       });
   };
 
-  /*   const handlegeneratedRecipe = () => {
-    const recipe = generateRandomRecipe()
-    setGeneratedRecipe(recipe);
+  const handlegeneratedRecipe = () => {
+    const [recipe] = generateRandomRecipe();
+    setGeneratedRecipe({
+      recipeName: recipe.name,
+      ingredients: recipe.ingredients,
+      instructions: recipe.instructions,
+      cookTime: recipe.cookTime,
+    });
     setOpenModal(true);
-  }; */
+  };
 
   const formik = useFormik({
     initialValues: { searchQuery: "" },
@@ -165,7 +176,7 @@ const UserProfileCmp = () => {
             _focus={{
               bg: "green.500",
             }}
-            onClick={() => {}}
+            onClick={handlegeneratedRecipe}
           >
             CLICK HERE
           </Button>
@@ -189,13 +200,13 @@ const UserProfileCmp = () => {
             LOGOUT
           </Box>
         </Box>
-        {/* <RecipeModal
+        <RecipeModal
           isOpen={openModal}
           onRequestClose={() => setOpenModal(false)}
           maxWidth={""}
           showCloseIcon={true}
           recipe={generatedRecipe}
-        /> */}
+        />
       </Container>
     </>
   );

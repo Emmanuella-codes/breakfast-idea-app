@@ -61,12 +61,15 @@ const HomeCmp = () => {
           >
             Breakfast Ideas
           </Heading>
-          <Text color={"gray.500"}>
+          <Text color={"gray.500"} fontSize="lg">
             Welcome to the ultimate breakfast inspiration app! Our app is here
             to help you get your day off to a great start with delicious and
             creative breakfast ideas. Whether you&apos;re looking for a quick
             and easy breakfast on the go or a relaxing weekend brunch,
             we&apos;ve got you covered.
+          </Text>
+          <Text color={"#203a62"} fontSize={{base:"l", md:"xl"}} fontWeight="700">
+            WITH A FREE ACCOUNT, YOU CAN GENERATE AND SAVE YOUR FAVORITE RECIPES!
           </Text>
         </Stack>
         <Stack spacing={9} direction={"row"} justifyContent="center">

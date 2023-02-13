@@ -22,7 +22,10 @@ const Navbar = () => {
 
   return (
     <>
-      <Box bg="#e5989b" px={4}>
+      <Box
+        bg="#594455"
+        px={4}
+      >
         <Flex h={16} alignItems={"center"} justifyContent={""}>
           {/* <IconButton
             size={"md"}

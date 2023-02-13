@@ -9,7 +9,7 @@ interface IHomeLayout {
 
 const HomeLayout = () => {
   return (
-    <Box display={"flex"} flexDir={"column"}>
+    <Box>
       <Navbar />
       <HomeCmp />
       <Box pos={"relative"} bottom="0" m="auto">

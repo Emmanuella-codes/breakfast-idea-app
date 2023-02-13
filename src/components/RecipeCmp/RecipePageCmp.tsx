@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { searchByIngredient } from "utils/getRecipes";
 import { recipes } from "utils/recipeData";
 
+
 const RecipePageCmp = () => {
   const [searchedRecipes, setSearchedRecipes] = useState([]);
   const [loading, setLoading] = useState(true);

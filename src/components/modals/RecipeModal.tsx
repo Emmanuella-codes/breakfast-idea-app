@@ -18,6 +18,8 @@ const RecipeModal: React.FC<{
   maxWidth: string;
   showCloseIcon: boolean;
   recipe: RecipeCardProps;
+  isSaved?: boolean;
+  saveRecipe?: (e: RecipeCardProps) => void;
 }> = ({ isOpen, onRequestClose, maxWidth, showCloseIcon, recipe }) => {
   const { recipeName, ingredients, instructions, cookTime } = recipe;
 
@@ -90,5 +92,6 @@ const RecipeModal: React.FC<{
     </>
   );
 };
+
 
 export default RecipeModal;

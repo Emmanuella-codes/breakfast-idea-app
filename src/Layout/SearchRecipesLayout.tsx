@@ -6,16 +6,13 @@ import { useRouter } from "next/router";
 
 const SearchRecipesLayout = () => {
   const router = useRouter();
-  const prevBtnAction =() => {
-    
-  }
+  const prevBtnAction = () => {};
 
   return (
     <Box display={"flex"} flexDir={"column"}>
       <Navbar />
-
       <RecipePageCmp />
-      <Box pos={"absolute"} bottom="0" alignSelf="center" mb="3">
+      <Box m="auto">
         <Footer />
       </Box>
     </Box>

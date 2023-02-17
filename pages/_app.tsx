@@ -1,10 +1,10 @@
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
-
 import firebase from "firebase/app";
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
+import { getFirestore } from "firebase/firestore";
 import "firebase/auth";
 import "firebase/firestore";
 
@@ -20,6 +20,8 @@ const clientCredentials = {
 //initialize firebase
 export const firebaseAppSetup = initializeApp(clientCredentials);
 // export const analytics = getAnalytics(firebaseApp);
+
+export const db = getFirestore(firebaseAppSetup);
 
 // export function to initialize firebase
 export const initFirebase = () => {

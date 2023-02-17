@@ -6,11 +6,23 @@ import {
   Flex,
   Icon,
   Button,
+  useToast,
 } from "@chakra-ui/react";
 import ModalCmp from "./ModalCmp";
-import { RecipeCardProps } from "components/RecipeCmp/RecipeCardCmp";
+import RecipeCardCmp, {
+  RecipeCardProps,
+} from "components/RecipeCmp/RecipeCardCmp";
 import { TfiAlarmClock } from "react-icons/tfi";
 import { useRouter } from "next/router";
+import { db } from "../../../pages/_app";
+import {
+  collection,
+  getFirestore,
+  getDoc,
+  doc,
+  setDoc,
+} from "firebase/firestore";
+import { useEffect, useState } from "react";
 
 const RecipeModal: React.FC<{
   isOpen: boolean;
@@ -18,13 +30,60 @@ const RecipeModal: React.FC<{
   maxWidth: string;
   showCloseIcon: boolean;
   recipe: RecipeCardProps;
-  isSaved?: boolean;
-  saveRecipe?: (e: RecipeCardProps) => void;
 }> = ({ isOpen, onRequestClose, maxWidth, showCloseIcon, recipe }) => {
   const { recipeName, ingredients, instructions, cookTime } = recipe;
 
+  const [isSaved, setIsSaved] = useState(false);
+
+  const toast = useToast({
+    position: "top",
+    containerStyle: {
+      zIndex: 9,
+    },
+  });
+
   const router = useRouter();
-  const userSignedIn = router.query.userID;
+  const userId = router.query.userID;
+
+  const saveRecipe = async (recipe) => {
+    try {
+      const docRef = collection(db, "user", `${userId}`, "recipe");
+      await setDoc(doc(docRef), recipe);
+      console.log(setDoc);
+      toast({
+        status: "success",
+        description: "Recipe saved successfully",
+      });
+    } catch (error) {
+      const errorMessage = error.message;
+      console.error("Error saving recipe: ", error);
+      toast({
+        status: "error",
+        description: errorMessage,
+      });
+    }
+  };
+
+  useEffect(() => {
+    const checkRecipeSaved = async () => {
+      try {
+        const docRef = doc(db, "user", recipeName, `${userId}`, "recipe");
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+          setIsSaved(true);
+        } else {
+          setIsSaved(false);
+        }
+      } catch (error) {
+        const errorMessage = error.message;
+        console.log(errorMessage);
+      }
+    };
+
+    if (userId) {
+      checkRecipeSaved();
+    }
+  }, [userId, recipeName]);
 
   return (
     <>
@@ -67,7 +126,7 @@ const RecipeModal: React.FC<{
             <Icon as={TfiAlarmClock} boxSize={6} />
             <Text>{` ${cookTime} `}</Text>
           </Flex>
-          {userSignedIn && (
+          {userId && !isSaved && (
             <Box>
               <Button
                 w={"full"}
@@ -81,7 +140,7 @@ const RecipeModal: React.FC<{
                 _focus={{
                   bg: "green.500",
                 }}
-                onClick={() => {}}
+                onClick={() => saveRecipe(recipe)}
               >
                 SAVE
               </Button>
@@ -92,6 +151,5 @@ const RecipeModal: React.FC<{
     </>
   );
 };
-
 
 export default RecipeModal;

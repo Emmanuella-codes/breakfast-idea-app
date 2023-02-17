@@ -18,6 +18,7 @@ import React, { useEffect, useState } from "react";
 import { searchByIngredient, generateRandomRecipe } from "utils/getRecipes";
 import RecipeModal from "components/modals/RecipeModal";
 import { RecipeCardProps } from "./RecipeCmp/RecipeCardCmp";
+import UserFavorites from "./UserFavorites";
 import { recipesType } from "utils/recipeData";
 import RecipeCardCmp from "./RecipeCmp/RecipeCardCmp";
 
@@ -159,7 +160,7 @@ const UserProfileCmp = () => {
         <Box
           mt={7}
           display="flex"
-          flexDir={"row"}
+          flexDir={{ base: "column", md: "row" }}
           justifyContent={"center"}
           gap={5}
           alignItems="center"
@@ -182,15 +183,8 @@ const UserProfileCmp = () => {
           </Button>
         </Box>
         {/* favorites section: user saved recipes will be displayed here */}
-        <Box color="#000">
-          <Box mt="7">
-            <Text as={"h3"} fontSize="2xl">
-              Favorites
-            </Text>
-          </Box>
-          <Flex></Flex>
-        </Box>
-        <Box mt={7}>
+        <UserFavorites />
+        <Box mt={16}>
           <Box
             as={Button}
             bgColor="blue.400"

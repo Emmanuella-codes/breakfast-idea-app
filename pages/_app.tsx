@@ -1,7 +1,6 @@
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
-import { Provider } from "react-redux";
 import firebase from "firebase/app";
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";

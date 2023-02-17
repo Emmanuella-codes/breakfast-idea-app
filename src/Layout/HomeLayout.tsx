@@ -12,7 +12,7 @@ const HomeLayout = () => {
     <Box>
       <Navbar />
       <HomeCmp />
-      <Box pos={"relative"} bottom="0" m="auto">
+      <Box m="auto">
         <Footer />
       </Box>
     </Box>

@@ -68,13 +68,18 @@ const HomeCmp = () => {
             and easy breakfast on the go or a relaxing weekend brunch,
             we&apos;ve got you covered.
           </Text>
-          <Text color={"#203a62"} fontSize={{base:"l", md:"xl"}} fontWeight="700">
-            WITH A FREE ACCOUNT, YOU CAN GENERATE AND SAVE YOUR FAVORITE RECIPES!
+          <Text
+            color={"#203a62"}
+            fontSize={{ base: "l", md: "xl" }}
+            fontWeight="700"
+          >
+            WITH A FREE ACCOUNT, YOU CAN GENERATE AND SAVE YOUR FAVORITE
+            RECIPES!
           </Text>
         </Stack>
         <Stack spacing={9} direction={"row"} justifyContent="center">
           <Button
-            rounded={"full"}
+            rounded={"lg"}
             p="0.8rem 1rem"
             bg="#000"
             color="#FFF"
@@ -86,7 +91,7 @@ const HomeCmp = () => {
             LOGIN
           </Button>
           <Button
-            rounded={"full"}
+            rounded={"lg"}
             p="0.8rem 1rem"
             bg="#2085ba"
             color="#FFF"

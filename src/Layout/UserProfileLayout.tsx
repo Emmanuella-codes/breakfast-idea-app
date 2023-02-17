@@ -8,7 +8,7 @@ const UserProfileLayout = () => {
     <Box>
       <Navbar />
       <UserProfileCmp />
-      <Box  bottom="0" textAlign={"center"}>
+      <Box pos="relative" bottom={0} m="auto">
         <Footer />
       </Box>
     </Box>

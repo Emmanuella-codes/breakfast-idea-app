@@ -21,8 +21,8 @@ const AboutUs = () => {
       </Text>
       <Text as={"p"} fontSize="lg">
         Our app offers a diverse range of breakfast recipes, including cuisines
-        from West Africa, South Africa, East Africa, the Caribbean, Mexico, and
-        Italy . We believe that breakfast can be elevated to an exciting and
+        from West Africa, South Africa, East Africa, the Caribbean and many
+        others. We believe that breakfast can be elevated to an exciting and
         enjoyable experience, and what better way to do so than by bringing the
         exotic scents and flavors of distant countries into your kitchen. With
         our app, you can enjoy a delicious and culturally diverse breakfast from

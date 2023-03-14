@@ -39,7 +39,22 @@ const RecipeCardList: React.FC<{
       </Flex>
       <Flex justifyContent={"space-between"} mt={9}>
         <Box>
-          c
+          <Button
+            bg={"green.400"}
+            color={"white"}
+            rounded={"xl"}
+            boxShadow={"0 5px 20px 0px rgb(72 187 120 / 43%)"}
+            _hover={{
+              bg: "green.500",
+            }}
+            _focus={{
+              bg: "green.500",
+            }}
+            onClick={handlePrev}
+            disabled={startIndex === 0}
+          >
+            Previous
+          </Button>
         </Box>
         {endIndex < recipes.length && (
           <Box>

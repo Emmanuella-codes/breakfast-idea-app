@@ -58,6 +58,7 @@ const HomeCmp = () => {
             fontSize={{ base: "4xl", md: "6xl" }}
             lineHeight={"110%"}
             color="#000"
+            fontFamily={"Mitr"}
           >
             Breakfast Ideas
           </Heading>
@@ -72,6 +73,7 @@ const HomeCmp = () => {
             color={"#203a62"}
             fontSize={{ base: "l", md: "xl" }}
             fontWeight="700"
+            fontFamily={"Overpass"}
           >
             WITH A FREE ACCOUNT, YOU CAN GENERATE AND SAVE YOUR FAVORITE
             RECIPES!
@@ -128,6 +130,7 @@ const HomeCmp = () => {
                 bgColor={"#4E9060"}
                 borderRadius="15px"
                 p="0.8rem 1rem"
+                color={"#FFF"}
                 type="submit"
                 isLoading={formik.isSubmitting}
                 isDisabled={formik.isValid ? false : true}

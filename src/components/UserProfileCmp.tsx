@@ -19,8 +19,6 @@ import { searchByIngredient, generateRandomRecipe } from "utils/getRecipes";
 import RecipeModal from "components/modals/RecipeModal";
 import { RecipeCardProps } from "./RecipeCmp/RecipeCardCmp";
 import UserFavorites from "./UserFavorites";
-import { recipesType } from "utils/recipeData";
-import RecipeCardCmp from "./RecipeCmp/RecipeCardCmp";
 
 const UserProfileCmp = () => {
   const toast = useToast({
@@ -111,6 +109,7 @@ const UserProfileCmp = () => {
             fontSize={{ base: "4xl", md: "6xl" }}
             lineHeight={"110%"}
             color="#000"
+            fontFamily={"Mitr"}
           >
             Breakfast Ideas
           </Heading>
@@ -139,7 +138,7 @@ const UserProfileCmp = () => {
               <Box
                 as={Button}
                 cursor={"pointer"}
-                bgColor={"#4E9060"}
+                bgColor={"green.400"}
                 borderRadius="15px"
                 p="0.8rem 1rem"
                 type="submit"
@@ -149,8 +148,9 @@ const UserProfileCmp = () => {
                   formik.handleSubmit;
                 }}
                 _hover={{
-                  bgColor: "green.500",
+                  bgColor: "green.600",
                 }}
+                color="#FFF"
               >
                 SUBMIT
               </Box>
@@ -189,7 +189,9 @@ const UserProfileCmp = () => {
             as={Button}
             bgColor="blue.400"
             onClick={handleSignOut}
+            color="#FFF"
             _hover={{ bg: "blue.900" }}
+            rounded={"xl"}
           >
             LOGOUT
           </Box>

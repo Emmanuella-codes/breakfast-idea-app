@@ -50,7 +50,7 @@ const UserFavorites = () => {
   };
 
   useEffect(() => {
-    const savedRecipes = JSON.parse(localStorage.getItem("recipeData") || "[]");
+    const savedRecipes = JSON.parse(localStorage.getItem("recipeData")) || [];
     setUserSavedRecipes(savedRecipes);
     console.log(savedRecipes);
   }, []);
@@ -70,6 +70,7 @@ const UserFavorites = () => {
         {!isDeleted &&
           userSavedRecipes?.length > 0 &&
           userSavedRecipes.slice(0, displayedRecipes).map((recipe, idx) => {
+            console.log(recipe.recipeName);
             /*  const { recipeName, ingredients, instructions, cookTime } = recipe; */
             return (
               <Box key={idx} bgColor={"gray.200"} rounded="xl" p={4}>

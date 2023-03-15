@@ -41,7 +41,7 @@ const RecipeModal: React.FC<{
 
   const saveRecipe = async (recipe: any) => {
     try {
-      const savedRecipes = JSON.parse(localStorage.getItem("recipeData")) || [];
+      const savedRecipes = [];
       savedRecipes.push(recipe);
       localStorage.setItem("recipeData", JSON.stringify(savedRecipes));
       setIsSaved(true);

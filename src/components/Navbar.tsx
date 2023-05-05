@@ -23,7 +23,7 @@ const Navbar = () => {
   return (
     <>
       <Box
-        bg="#D5C2C9"
+        bg="#aec3b0"
         px={4}
       >
         <Flex h={16} alignItems={"center"} justifyContent={""}>

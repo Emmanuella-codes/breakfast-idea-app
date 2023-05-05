@@ -7,6 +7,9 @@ import { getAnalytics } from "firebase/analytics";
 import { getFirestore } from "firebase/firestore";
 import "firebase/auth";
 import "firebase/firestore";
+import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
+import { store, persistor } from "../src/store/index";
 
 const clientCredentials = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEYNEXT_PUBLIC_FIREBASE_API_KEY,
@@ -41,7 +44,11 @@ const theme = extendTheme({ colors }) */
 const App: React.FC<AppProps> = ({ Component, pageProps }) => {
   return (
     <ChakraProvider /* theme={theme} */>
-      <Component {...pageProps} />
+      <Provider store={store}>
+        <PersistGate persistor={persistor}>
+          <Component {...pageProps} />
+        </PersistGate>
+      </Provider>
     </ChakraProvider>
   );
 };

@@ -5,8 +5,10 @@ body {
   scroll-behavior: smooth;
   padding: 0;
   margin: 0;
+  font-family: "Molengo" !important;
 }
 
-body.light {
+body {
   background: #ffffff;
+  font-family: "Molengo" !important;
 }

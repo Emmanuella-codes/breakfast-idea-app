@@ -1,12 +1,4 @@
 import { Box, Button, Flex, Text, useToast } from "@chakra-ui/react";
-import {
-  collection,
-  doc,
-  deleteDoc,
-  getDocs,
-  getDoc,
-} from "firebase/firestore";
-import { db } from "../../pages/_app";
 import { useEffect, useState } from "react";
 import DeleteModal from "./modals/DeleteModal";
 import RecipeModal from "./modals/RecipeModal";
@@ -17,6 +9,7 @@ const UserFavorites = () => {
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
   const [openRecipeModal, setOpenRecipeModal] = useState(false);
   const [isDeleted, setIsDeleted] = useState(false);
+  const [displayedRecipes, setDisplayedRecipes] = useState(3);
 
   const router = useRouter();
   const userSignedIn = router.query.userID;
@@ -28,16 +21,23 @@ const UserFavorites = () => {
     },
   });
 
+  const loadMore = () => {
+    setDisplayedRecipes(displayedRecipes + 6);
+  };
+
   const deleteRecipe = async (recipe: any) => {
     try {
-      const recipeDoc = doc(db, "recipes", "DR");
-      await deleteDoc(recipeDoc);
+      const savedRecipes = userSavedRecipes.filter(
+        (r: any) => r.recipeName !== recipe.recipeName
+      );
+      setUserSavedRecipes(savedRecipes);
+      localStorage.setItem("recipeData", JSON.stringify(savedRecipes));
+      setIsDeleted(true);
+      setOpenDeleteModal(false);
       toast({
         status: "success",
         description: "Recipe deleted successfully",
       });
-      setIsDeleted(true);
-      setOpenDeleteModal(false);
     } catch (error) {
       const errorMessage = error.message;
       console.log(error);
@@ -50,45 +50,35 @@ const UserFavorites = () => {
   };
 
   useEffect(() => {
-    const getSavedRecipes = async () => {
-      try {
-        const docRef = collection(db, "user");
-        const querySnapshot = await getDocs(docRef);
-        const savedRecipes = [];
-        querySnapshot.forEach((doc) => savedRecipes.push(doc.data()));
-        console.log("saved recipes: ", savedRecipes);
-        setUserSavedRecipes(savedRecipes);
-        return savedRecipes;
-      } catch (error) {
-        const errorMessage = error.message;
-        console.log(errorMessage);
-      }
-    };
-
-    getSavedRecipes();
+    const savedRecipes = localStorage.getItem("recipeData");
+    console.log(savedRecipes);
+    if (savedRecipes) {
+      const parsedSavedRecipes = JSON.parse(savedRecipes);
+      setUserSavedRecipes(parsedSavedRecipes);
+      console.log(parsedSavedRecipes);
+    }
   }, []);
 
-  /*   console.log(userSavedRecipes); */
-
   return (
-    <Flex mt={7} color="black" flexDir={"column"}>
+    <Flex mt={7} color="#000" flexDir={"column"} mx={{ base: "auto" }}>
       <Text as={"h3"} fontSize="2xl">
         Favorites
       </Text>
       <Text>Recipes you save would be displayed here.</Text>
-      <Flex flexDir="row">
+      <Flex
+        flexDir={{ base: "column", md: "row" }}
+        gap={3}
+        w="80%"
+        flexWrap="wrap"
+      >
         {!isDeleted &&
           userSavedRecipes?.length > 0 &&
-          userSavedRecipes.map((recipe: any) => {
-            const { recipeName, ingredients, instructions, cookTime } = recipe;
+          userSavedRecipes.slice(0, displayedRecipes).map((recipe, idx) => {
+            console.log(recipe.recipeName);
+            /*  const { recipeName, ingredients, instructions, cookTime } = recipe; */
             return (
-              <Box
-                key={`recipe-${recipe.id}`}
-                bgColor={"gray.200"}
-                rounded="xl"
-                p={4}
-              >
-                <Text color="black">{recipe.recipeName}</Text>
+              <Box key={idx} bgColor={"gray.200"} rounded="xl" p={4}>
+                <Text color="#000">{recipe.recipeName}</Text>
                 <Flex justifyContent={"space-between"} gap={3} my={4}>
                   <Button
                     w={"full"}
@@ -130,7 +120,7 @@ const UserFavorites = () => {
                   onRequestClose={() => setOpenRecipeModal(false)}
                   maxWidth={""}
                   showCloseIcon={false}
-                  recipe={{ recipeName, ingredients, instructions, cookTime }}
+                  recipe={recipe}
                 />
                 <DeleteModal
                   isOpen={openDeleteModal}
@@ -148,6 +138,26 @@ const UserFavorites = () => {
             );
           })}
       </Flex>
+      {userSavedRecipes?.length > displayedRecipes && (
+        <Box mt={5}>
+          <Button
+            bg={"green.400"}
+            color={"white"}
+            rounded={"xl"}
+            boxShadow={"0 5px 20px 0px rgb(72 187 120 / 43%)"}
+            fontSize="sm"
+            _hover={{
+              bg: "green.500",
+            }}
+            _focus={{
+              bg: "green.500",
+            }}
+            onClick={loadMore}
+          >
+            Load More
+          </Button>
+        </Box>
+      )}
     </Flex>
   );
 };

@@ -15,14 +15,9 @@ import RecipeCardCmp, {
 import { TfiAlarmClock } from "react-icons/tfi";
 import { useRouter } from "next/router";
 import { db } from "../../../pages/_app";
-import {
-  collection,
-  getFirestore,
-  getDoc,
-  doc,
-  setDoc,
-} from "firebase/firestore";
+import { collection, getDoc, doc, setDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
 const RecipeModal: React.FC<{
   isOpen: boolean;
@@ -45,11 +40,20 @@ const RecipeModal: React.FC<{
   const router = useRouter();
   const userId = router.query.userID;
 
-  const saveRecipe = async (recipe) => {
+  const saveRecipe = (recipe: any) => {
     try {
-      const docRef = collection(db, "user", `${userId}`, "recipe");
-      await setDoc(doc(docRef), recipe);
-      console.log(setDoc);
+      const savedRecipes = localStorage.getItem("recipeData") || [];
+      
+      let parsedSavedRecipes;
+      typeof savedRecipes === "string"
+        ? (parsedSavedRecipes = JSON.parse(savedRecipes))
+        : (parsedSavedRecipes = savedRecipes);
+      const updatedRecipes = [...parsedSavedRecipes, recipe];
+      /* const savedRecipes = JSON.parse(localStorage.getItem("recipeData")) || [];
+      savedRecipes.push(recipe); */
+      localStorage.setItem("recipeData", JSON.stringify(updatedRecipes));
+      console.log(savedRecipes);
+      setIsSaved(true);
       toast({
         status: "success",
         description: "Recipe saved successfully",
@@ -64,26 +68,22 @@ const RecipeModal: React.FC<{
     }
   };
 
+  /* const userToken = localStorage. */
+ /*  const saveRecipeLocally = () => {
+    
+  } */
+  
+
   useEffect(() => {
-    const checkRecipeSaved = async () => {
-      try {
-        const docRef = doc(db, "user", recipeName, `${userId}`, "recipe");
-        const docSnap = await getDoc(docRef);
-        if (docSnap.exists()) {
-          setIsSaved(true);
-        } else {
-          setIsSaved(false);
-        }
-      } catch (error) {
-        const errorMessage = error.message;
-        console.log(errorMessage);
-      }
+    const checkRecipeSaved = () => {
+      const savedRecipesLocally = localStorage.getItem(recipe.recipeName);
+      savedRecipesLocally ? setIsSaved(true) : setIsSaved(false);
     };
 
     if (userId) {
       checkRecipeSaved();
     }
-  }, [userId, recipeName]);
+  }, [userId, recipe.recipeName, isSaved]);
 
   return (
     <>
@@ -98,8 +98,8 @@ const RecipeModal: React.FC<{
         shouldCloseOnEsc={true}
         showCloseIcon={showCloseIcon}
       >
-        <Box px={5}>
-          <Text fontSize={"4xl"} fontWeight={800}>
+        <Box px={5} pb={3}>
+          <Text fontSize={"4xl"} fontWeight={800} color="#FFF">
             {recipeName}
           </Text>
         </Box>
@@ -140,7 +140,10 @@ const RecipeModal: React.FC<{
                 _focus={{
                   bg: "green.500",
                 }}
-                onClick={() => saveRecipe(recipe)}
+                onClick={() => {
+                  saveRecipe(recipe);
+                  onRequestClose();
+                }}
               >
                 SAVE
               </Button>

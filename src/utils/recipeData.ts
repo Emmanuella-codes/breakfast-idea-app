@@ -1,5 +1,5 @@
 export interface recipesType {
-  id: string;
+  id: number;
   name: string;
   ingredients: string[];
   instructions: string[];
@@ -8,7 +8,7 @@ export interface recipesType {
 
 export const recipes: recipesType[] = [
   {
-    id: "1",
+    id: 1,
     name: "Fried Eggs, Bread and Tea",
     ingredients: [
       "4 Fresh eggs",
@@ -30,7 +30,7 @@ export const recipes: recipesType[] = [
     cookTime: "8 minutes",
   },
   {
-    id: "2",
+    id: 2,
     name: "Ewa Agoyin and Bread",
     ingredients: [
       "1 cup of dried crushed chilies/peppers",
@@ -60,7 +60,7 @@ export const recipes: recipesType[] = [
     cookTime: "1 hour",
   },
   {
-    id: "3",
+    id: 3,
     name: "Fried Yam and Tomato Sauce",
     ingredients: [
       "Yam",
@@ -84,7 +84,7 @@ export const recipes: recipesType[] = [
     cookTime: "45 minutes",
   },
   {
-    id: "4",
+    id: 4,
     name: "Bread, Akara and Pap",
     ingredients: [
       "3 cups black-eyed or brown beans",
@@ -123,7 +123,7 @@ export const recipes: recipesType[] = [
     cookTime: "2 hours",
   },
   {
-    id: "5",
+    id: 5,
     name: "Waakye",
     ingredients: [
       "1 pound boneless goat shoulder",
@@ -180,7 +180,7 @@ export const recipes: recipesType[] = [
     cookTime: "2 hours 20 minutes",
   },
   {
-    id: "6",
+    id: 6,
     name: "Tom Brown",
     ingredients: [
       "Guinea corn",
@@ -210,7 +210,7 @@ export const recipes: recipesType[] = [
     cookTime: "1 hour",
   },
   {
-    id: "7",
+    id: 7,
     name: "Hausa Koko and Kose",
     ingredients: [
       "2 cups of whole pearl millet (or 1 cup of millet and 1 cup of sorghum)",
@@ -245,7 +245,7 @@ export const recipes: recipesType[] = [
     cookTime: "2 days",
   },
   {
-    id: "8",
+    id: 8,
     name: "Tatale (plantain pancakes)",
     ingredients: [
       "Over ripe plantains",
@@ -268,7 +268,7 @@ export const recipes: recipesType[] = [
     cookTime: "30 minutes",
   },
   {
-    id: "9",
+    id: 9,
     name: "Akla (Beans Fritters)",
     ingredients: [
       "3 cups black-eyed beans",
@@ -296,7 +296,7 @@ export const recipes: recipesType[] = [
     cookTime: "2 hours 30 minutes",
   },
   {
-    id: "10",
+    id: 10,
     name: "Oblayo",
     ingredients: ["Corn (roughly ground)", "Water", "Sugar", "Milk"],
     instructions: [
@@ -311,7 +311,7 @@ export const recipes: recipesType[] = [
     cookTime: "10 minutes",
   },
   {
-    id: "11",
+    id: 11,
     name: "Rice Water",
     ingredients: [
       "1 cup rice",
@@ -333,7 +333,7 @@ export const recipes: recipesType[] = [
     cookTime: "32 minutes",
   },
   {
-    id: "12",
+    id: 12,
     name: "Salatu Niebe (black-eyed beans salad)",
     ingredients: [
       "1/2 pound black-eyed beans, soaked in water preferably overnight",
@@ -359,7 +359,7 @@ export const recipes: recipesType[] = [
     cookTime: "45 minutes",
   },
   {
-    id: "13",
+    id: 13,
     name: "Jamaican Ackee and Saltfish",
     ingredients: [
       "Salted codfish",
@@ -393,7 +393,7 @@ export const recipes: recipesType[] = [
     cookTime: "45 minutes",
   },
   {
-    id: "14",
+    id: 14,
     name: "Banana Fritters",
     ingredients: [
       "3 ripe bananas",
@@ -419,7 +419,7 @@ export const recipes: recipesType[] = [
     cookTime: "20 minutes",
   },
   {
-    id: "15",
+    id: 15,
     name: "Jamaican Corn Meal Porridge",
     ingredients: [
       "2 cups water",
@@ -442,7 +442,7 @@ export const recipes: recipesType[] = [
     cookTime: "25 minutes",
   },
   {
-    id: "16",
+    id: 16,
     name: "Jollof Rice",
     ingredients: [
       "Rice",
@@ -471,7 +471,7 @@ export const recipes: recipesType[] = [
     cookTime: "1 hour",
   },
   {
-    id: "17",
+    id: 17,
     name: "Plantain Porridge",
     ingredients: [
       "2 medium sized plantains (ripe, semi ripe or unripe)",
@@ -502,7 +502,7 @@ export const recipes: recipesType[] = [
     cookTime: "35 minutes",
   },
   {
-    id: "18",
+    id: 18,
     name: "Maafe Soup",
     ingredients: [
       "¼ cup oil or more",
@@ -537,7 +537,7 @@ export const recipes: recipesType[] = [
     cookTime: "55 minutes",
   },
   {
-    id: "19",
+    id: 19,
     name: "Moi moi and Pap or Garri",
     ingredients: [
       "700g Black eyed or brown beans",
@@ -586,7 +586,7 @@ export const recipes: recipesType[] = [
     cookTime: "3 hours",
   },
   {
-    id: "20",
+    id: 20,
     name: "Plantain and Scrambled Egg",
     ingredients: [
       "3 eggs",
@@ -609,7 +609,7 @@ export const recipes: recipesType[] = [
     cookTime: "50 minutes",
   },
   {
-    id: "21",
+    id: 21,
     name: "Mushroom And Spinach Omelette",
     ingredients: [
       "1 tablespoon oil",
@@ -633,7 +633,7 @@ export const recipes: recipesType[] = [
     cookTime: "20 minutes",
   },
   {
-    id: "22",
+    id: 22,
     name: "French Toast",
     ingredients: [
       "1 egg",
@@ -654,7 +654,7 @@ export const recipes: recipesType[] = [
     cookTime: "6 minutes",
   },
   {
-    id: "23",
+    id: 23,
     name: "Chicken Sandwich",
     ingredients: [
       "2 tablespoons Oil",
@@ -676,7 +676,7 @@ export const recipes: recipesType[] = [
     cookTime: "20 minutes",
   },
   {
-    id: "24",
+    id: 24,
     name: "Peanut Butter & Chocolate Chip Pancakes",
     ingredients: [
       "1 cup all-purpose flour",
@@ -703,7 +703,7 @@ export const recipes: recipesType[] = [
     cookTime: "13 minutes",
   },
   {
-    id: "25",
+    id: 25,
     name: "Carrot Pancake",
     ingredients: [
       "1/4 teaspoon margarine",
@@ -732,7 +732,7 @@ export const recipes: recipesType[] = [
     cookTime: "15 minutes",
   },
   {
-    id: "26",
+    id: 26,
     name: "Peanut Sauce Pasta",
     ingredients: [
       "200 grams spaghetti pasta",
@@ -763,7 +763,7 @@ export const recipes: recipesType[] = [
     cookTime: "30 minutes",
   },
   {
-    id: "27",
+    id: 27,
     name: "Asian Style Peanut Noodles",
     ingredients: [
       "2 packs of dried rice noodles (approx. 260 g)",
@@ -791,7 +791,7 @@ export const recipes: recipesType[] = [
     cookTime: "15 minutes",
   },
   {
-    id: "28",
+    id: 28,
     name: "Wimbi Porridge",
     ingredients: [
       "1 cup of grinded millet",
@@ -812,7 +812,7 @@ export const recipes: recipesType[] = [
     cookTime: "30 minutes",
   },
   {
-    id: "29",
+    id: 29,
     name: "Creamy Bacon & Macaroni Salad",
     ingredients: [
       "2 cups macaroni pasta",
@@ -836,7 +836,7 @@ export const recipes: recipesType[] = [
     cookTime: "30 minutes",
   },
   {
-    id: "30",
+    id: 30,
     name: "Rolex Recipe",
     ingredients: [
       "2 eggs",
@@ -863,7 +863,7 @@ export const recipes: recipesType[] = [
     cookTime: "20 minutes",
   },
   {
-    id: "31",
+    id: 31,
     name: "Breakfast Crepes",
     ingredients: [
       "3 eggs",
@@ -885,7 +885,7 @@ export const recipes: recipesType[] = [
     cookTime: "13 minutes",
   },
   {
-    id: "32",
+    id: 32,
     name: "Spaghetti with Spicy Minced Meat",
     ingredients: [
       "400 grams tagliatelle or other pasta",
@@ -913,7 +913,7 @@ export const recipes: recipesType[] = [
     cookTime: "45 minutes",
   },
   {
-    id: "33",
+    id: 33,
     name: "Thai Fried Rice",
     ingredients: [
       "1 tablespoon margarine",
@@ -948,7 +948,7 @@ export const recipes: recipesType[] = [
     cookTime: "40 minutes",
   },
   {
-    id: "34",
+    id: 34,
     name: "Beef Stir Fry Noodles",
     ingredients: [
       "2 Packet Noodles",
@@ -984,7 +984,7 @@ export const recipes: recipesType[] = [
     cookTime: "35 minutes",
   },
   {
-    id: "35",
+    id: 35,
     name: "Waffles",
     ingredients: [
       "40 grams margarine",
@@ -1005,7 +1005,7 @@ export const recipes: recipesType[] = [
     cookTime: "50 minutes",
   },
   {
-    id: "36",
+    id: 36,
     name: "Chicken Frittata",
     ingredients: [
       "2 - 3 ripe plantains",
@@ -1051,7 +1051,7 @@ export const recipes: recipesType[] = [
     cookTime: "1 hour 5 minutes",
   },
   {
-    id: "37",
+    id: 37,
     name: "Oat and Banana Porridge",
     ingredients: [
       "Rolled oats",
@@ -1071,7 +1071,7 @@ export const recipes: recipesType[] = [
     cookTime: "15 minutes",
   },
   {
-    id: "38",
+    id: 38,
     name: "Chakalaka",
     ingredients: [
       "White and red onion",
@@ -1104,7 +1104,7 @@ export const recipes: recipesType[] = [
     cookTime: "45 minutes",
   },
   {
-    id: "39",
+    id: 39,
     name: "Jamaican Green Banana Porridge",
     ingredients: [
       "4 green bananas",
@@ -1131,7 +1131,7 @@ export const recipes: recipesType[] = [
     cookTime: "25 minutes",
   },
   {
-    id: "40",
+    id: 40,
     name: "Keto-friendly PF Chang Lettuce Wraps",
     ingredients: [
       "Ground chicken",
@@ -1160,7 +1160,7 @@ export const recipes: recipesType[] = [
     cookTime: "30 minutes",
   },
   {
-    id: "41",
+    id: 41,
     name: "Mantou Bread with Butter Chicken",
     ingredients: [
       "Margarine",
@@ -1194,7 +1194,7 @@ export const recipes: recipesType[] = [
     cookTime: "1 hour",
   },
   {
-    id: "42",
+    id: 42,
     name: "Massaman Beef Curry",
     ingredients: [
       "30 gram margarine",
@@ -1223,7 +1223,7 @@ export const recipes: recipesType[] = [
     cookTime: "1 hour 30 minutes",
   },
   {
-    id: "43",
+    id: 43,
     name: "Breakfast Burrito",
     ingredients: [
       "3 tablespoons vegetable oil",
@@ -1256,7 +1256,7 @@ export const recipes: recipesType[] = [
     cookTime: "40 minutes",
   },
   {
-    id: "44",
+    id: 44,
     name: "Chicken Quesadillas",
     ingredients: [
       "Smoked paprika",
@@ -1296,7 +1296,7 @@ export const recipes: recipesType[] = [
     cookTime: "45 minutes",
   },
   {
-    id: "45",
+    id: 45,
     name: "Grilled Moroccan Chicken",
     ingredients: [
       "1½ to 1¾ pounds boneless skinless chicken breasts (or chicken tenderloins)",
@@ -1324,7 +1324,7 @@ export const recipes: recipesType[] = [
     cookTime: "2 hours 30 minutes",
   },
   {
-    id: "46",
+    id: 46,
     name: "Kung Pao Chicken and Cooked Basmati Rice",
     ingredients: [
       "3½ tablespoons soy sauce",
@@ -1371,7 +1371,7 @@ export const recipes: recipesType[] = [
     cookTime: "45 minutes",
   },
   {
-    id: "47",
+    id: 47,
     name: "Classic Chicken Salad",
     ingredients: [
       "⅔ cup mayonnaise",
@@ -1396,7 +1396,7 @@ export const recipes: recipesType[] = [
     cookTime: "30 minutes",
   },
   {
-    id: "48",
+    id: 48,
     name: "Summer Avocado Salad",
     ingredients: [
       "¼ cup unseasoned rice vinegar",
@@ -1423,7 +1423,7 @@ export const recipes: recipesType[] = [
     cookTime: "20 minutes",
   },
   {
-    id: "49",
+    id: 49,
     name: "Basmati Rice Pilaf with Dried Fruits and Almonds",
     ingredients: [
       "1½ cups basmati rice",
@@ -1458,7 +1458,7 @@ export const recipes: recipesType[] = [
     cookTime: "35 minutes",
   },
   {
-    id: "50",
+    id: 50,
     name: "Spaghetti Bolognese",
     ingredients: [
       "2 medium yellow onions, peeled and chopped",
@@ -1504,7 +1504,7 @@ export const recipes: recipesType[] = [
     cookTime: "2 hours 30 minutes",
   },
   {
-    id: "51",
+    id: 51,
     name: "Spinach Frittata",
     ingredients: [
       "2 tablespoons extra virgin olive oil",
@@ -1534,7 +1534,7 @@ export const recipes: recipesType[] = [
     cookTime: "35 minutes",
   },
   {
-    id: "52",
+    id: 52,
     name: "Ghanaian Kenkey",
     ingredients: [
       "White cornmeal",
@@ -1565,7 +1565,7 @@ export const recipes: recipesType[] = [
     cookTime: " 2- 4 days, 2 hours 45 minutes",
   },
   {
-    id: "53",
+    id: 53,
     name: "Kelewele (Spicy Plantain)",
     ingredients: [
       "6 Ripe Plantains",
@@ -1595,7 +1595,7 @@ export const recipes: recipesType[] = [
     cookTime: "35 minutes",
   },
   {
-    id: "54",
+    id: 54,
     name: "Mexican Torta Cubana Recipe",
     ingredients: [
       "Unsalted butter - 3 tablespoons",
@@ -1628,7 +1628,7 @@ export const recipes: recipesType[] = [
     cookTime: "30 minutes",
   },
   {
-    id: "55",
+    id: 55,
     name: "Jamaican Gungo Peas and Rice Recipe",
     ingredients: [
       "2 cups long-grain white rice rinsed",
@@ -1655,7 +1655,7 @@ export const recipes: recipesType[] = [
     cookTime: "33 minutes",
   },
   {
-    id: "56",
+    id: 56,
     name: "Chocolate Banana Bread",
     ingredients: [
       "1¼ cups all-purpose flour, spooned into measuring cup and leveled-off",
@@ -1687,7 +1687,7 @@ export const recipes: recipesType[] = [
     cookTime: "1 hour 30 minutes",
   },
   {
-    id: "57",
+    id: 57,
     name: "Chicken Bog",
     ingredients: [
       "1 whole chicken (4-5 pounds)",
@@ -1726,7 +1726,7 @@ export const recipes: recipesType[] = [
     cookTime: "1 hour 50 minutes",
   },
   {
-    id: "58",
+    id: 58,
     name: "Italian Chicken and Pasta",
     ingredients: [
       "Boneless skinless chicken thighs",
@@ -1743,7 +1743,7 @@ export const recipes: recipesType[] = [
     cookTime: "4 hours 10 minutes",
   },
   {
-    id: "59",
+    id: 59,
     name: "Creamy Chicken Marsala and pasta",
     ingredients: [
       "8 boneless skinless chicken thighs (about 2 lb)",
@@ -1774,7 +1774,7 @@ export const recipes: recipesType[] = [
     cookTime: "4 hours 35 minutes",
   },
   {
-    id: "60",
+    id: 60,
     name: "Chicken Nachos",
     ingredients: [
       "2 tablespoons extra-virgin olive oil",
@@ -1816,7 +1816,7 @@ export const recipes: recipesType[] = [
     cookTime: "45 minutes",
   },
   {
-    id: "61",
+    id: 61,
     name: "Chicken Curry and Basmati Rice",
     ingredients: [
       "1¼ pounds boneless, skinless chicken breasts, cut into ¼-inch strips",
@@ -1850,7 +1850,7 @@ export const recipes: recipesType[] = [
     cookTime: "30 minutes",
   },
   {
-    id: "62",
+    id: 62,
     name: "Vetkoek",
     ingredients: [
       "5 ½ cups cake flour plus more",
@@ -1891,7 +1891,7 @@ export const recipes: recipesType[] = [
     cookTime: "1 hour 30 minutes",
   },
   {
-    id: "63",
+    id: 63,
     name: "Nigerian Fried Rice",
     ingredients: [
       "6 cups cooked rice (you can use basmati rice)",
@@ -1928,7 +1928,7 @@ export const recipes: recipesType[] = [
     cookTime: "35 minutes",
   },
   {
-    id: "64",
+    id: 64,
     name: "Chicken Fried Rice",
     ingredients: [
       "1 pound boneless, skinless chicken thighs or breasts",
@@ -1971,7 +1971,7 @@ export const recipes: recipesType[] = [
     cookTime: "1 hour 40 minutes",
   },
   {
-    id: "65",
+    id: 65,
     name: "Coconut Fried Rice",
     ingredients: [
       "1 cup rice",
@@ -2010,7 +2010,7 @@ export const recipes: recipesType[] = [
     cookTime: "1 hour",
   },
   {
-    id: "66",
+    id: 66,
     name: "Cajun Jambalaya Pasta",
     ingredients: [
       "½ pound fettuccine",
@@ -2047,7 +2047,7 @@ export const recipes: recipesType[] = [
     cookTime: "45 minutes",
   },
   {
-    id: "67",
+    id: 67,
     name: "Rasta Pasta",
     ingredients: [
       "2 pounds (908 g) boneless, skinless chicken thighs or breasts",
@@ -2088,7 +2088,7 @@ export const recipes: recipesType[] = [
     cookTime: "1 hour 25 minutes",
   },
   {
-    id: "68",
+    id: 68,
     name: "Spicy Shrimp Spinach Pasta",
     ingredients: [
       "½ pound spaghetti",
@@ -2125,7 +2125,7 @@ export const recipes: recipesType[] = [
     cookTime: "30 minutes",
   },
   {
-    id: "69",
+    id: 69,
     name: "Creamy Shrimp Pasta",
     ingredients: [
       "1 pound large shrimp peeled and deveined",
@@ -2161,7 +2161,7 @@ export const recipes: recipesType[] = [
     cookTime: "30 minutes",
   },
   {
-    id: "70",
+    id: 70,
     name: "Stuffed Baked Plantains",
     ingredients: [
       "2-3 ripe plantains",

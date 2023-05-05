@@ -50,9 +50,13 @@ const UserFavorites = () => {
   };
 
   useEffect(() => {
-    const savedRecipes = JSON.parse(localStorage.getItem("recipeData")) || [];
-    setUserSavedRecipes(savedRecipes);
+    const savedRecipes = localStorage.getItem("recipeData");
     console.log(savedRecipes);
+    if (savedRecipes) {
+      const parsedSavedRecipes = JSON.parse(savedRecipes);
+      setUserSavedRecipes(parsedSavedRecipes);
+      console.log(parsedSavedRecipes);
+    }
   }, []);
 
   return (

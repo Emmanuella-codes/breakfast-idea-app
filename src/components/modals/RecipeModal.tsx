@@ -17,6 +17,7 @@ import { useRouter } from "next/router";
 import { db } from "../../../pages/_app";
 import { collection, getDoc, doc, setDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
 const RecipeModal: React.FC<{
   isOpen: boolean;
@@ -39,11 +40,19 @@ const RecipeModal: React.FC<{
   const router = useRouter();
   const userId = router.query.userID;
 
-  const saveRecipe = async (recipe: any) => {
+  const saveRecipe = (recipe: any) => {
     try {
-      const savedRecipes = [];
-      savedRecipes.push(recipe);
-      localStorage.setItem("recipeData", JSON.stringify(savedRecipes));
+      const savedRecipes = localStorage.getItem("recipeData") || [];
+      
+      let parsedSavedRecipes;
+      typeof savedRecipes === "string"
+        ? (parsedSavedRecipes = JSON.parse(savedRecipes))
+        : (parsedSavedRecipes = savedRecipes);
+      const updatedRecipes = [...parsedSavedRecipes, recipe];
+      /* const savedRecipes = JSON.parse(localStorage.getItem("recipeData")) || [];
+      savedRecipes.push(recipe); */
+      localStorage.setItem("recipeData", JSON.stringify(updatedRecipes));
+      console.log(savedRecipes);
       setIsSaved(true);
       toast({
         status: "success",
@@ -59,6 +68,12 @@ const RecipeModal: React.FC<{
     }
   };
 
+  /* const userToken = localStorage. */
+ /*  const saveRecipeLocally = () => {
+    
+  } */
+  
+
   useEffect(() => {
     const checkRecipeSaved = () => {
       const savedRecipesLocally = localStorage.getItem(recipe.recipeName);
@@ -68,7 +83,7 @@ const RecipeModal: React.FC<{
     if (userId) {
       checkRecipeSaved();
     }
-  }, [userId, recipe.recipeName]);
+  }, [userId, recipe.recipeName, isSaved]);
 
   return (
     <>

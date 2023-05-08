@@ -18,6 +18,7 @@ import { db } from "../../../pages/_app";
 import { collection, getDoc, doc, setDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { addRecipes } from "store/UserRecipes";
 
 const RecipeModal: React.FC<{
   isOpen: boolean;
@@ -26,9 +27,11 @@ const RecipeModal: React.FC<{
   showCloseIcon: boolean;
   recipe: RecipeCardProps;
 }> = ({ isOpen, onRequestClose, maxWidth, showCloseIcon, recipe }) => {
-  const { recipeName, ingredients, instructions, cookTime } = recipe;
+  const { id, recipeName, ingredients, instructions, cookTime } = recipe;
 
   const [isSaved, setIsSaved] = useState(false);
+
+  const dispatch = useDispatch();
 
   const toast = useToast({
     position: "top",
@@ -41,38 +44,14 @@ const RecipeModal: React.FC<{
   const userId = router.query.userID;
 
   const saveRecipe = (recipe: any) => {
-    try {
-      const savedRecipes = localStorage.getItem("recipeData") || [];
-      
-      let parsedSavedRecipes;
-      typeof savedRecipes === "string"
-        ? (parsedSavedRecipes = JSON.parse(savedRecipes))
-        : (parsedSavedRecipes = savedRecipes);
-      const updatedRecipes = [...parsedSavedRecipes, recipe];
-      /* const savedRecipes = JSON.parse(localStorage.getItem("recipeData")) || [];
-      savedRecipes.push(recipe); */
-      localStorage.setItem("recipeData", JSON.stringify(updatedRecipes));
-      console.log(savedRecipes);
-      setIsSaved(true);
-      toast({
-        status: "success",
-        description: "Recipe saved successfully",
-      });
-    } catch (error) {
-      const errorMessage = error.message;
-      console.error("Error saving recipe: ", error);
-      toast({
-        status: "error",
-        description: errorMessage,
-      });
-    }
+    dispatch(addRecipes(recipe))
+    setIsSaved(true)
   };
 
   /* const userToken = localStorage. */
- /*  const saveRecipeLocally = () => {
+  /*  const saveRecipeLocally = () => {
     
   } */
-  
 
   useEffect(() => {
     const checkRecipeSaved = () => {

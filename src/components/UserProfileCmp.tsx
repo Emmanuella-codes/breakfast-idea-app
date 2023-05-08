@@ -36,6 +36,7 @@ const UserProfileCmp = () => {
     ingredients: [],
     instructions: [],
     cookTime: "",
+    id: 0,
   });
 
   const auth = getAuth();
@@ -67,6 +68,7 @@ const UserProfileCmp = () => {
       ingredients: recipe.ingredients,
       instructions: recipe.instructions,
       cookTime: recipe.cookTime,
+      id: recipe.id,
     });
     setOpenModal(true);
   };

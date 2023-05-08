@@ -12,14 +12,24 @@ export const userRecipesSlice = createSlice({
       const lastRecipe = state.value[state.value.length - 1];
       const lastRecipeId = lastRecipe ? lastRecipe.id : 0;
 
-      const newRecipes = { ...action.payload, id: lastRecipeId + 1};
-      state.value.push(newRecipes)
+      const newRecipes = { ...action.payload, id: lastRecipeId + 1 };
+      state.value.push(newRecipes);
     },
-    deleteRecipes: () => {},
-    updateRecipes: () => {},
+    deleteRecipes: (
+      state: { value: recipesType[] },
+      action: PayloadAction<number>
+    ) => {
+      /* state.value = state.value.filter((recipe) => recipe.id != action.payload); */
+      const index = state.value.findIndex(
+        (recipe) => recipe.id === action.payload
+      );
+      if (index !== -1) {
+        state.value.splice(index, 1);
+      }
+      console.log(action.payload);
+    },
   },
 });
 
-export const { addRecipes, deleteRecipes, updateRecipes } =
-  userRecipesSlice.actions;
+export const { addRecipes, deleteRecipes } = userRecipesSlice.actions;
 export default userRecipesSlice.reducer;

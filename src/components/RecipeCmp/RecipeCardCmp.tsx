@@ -11,6 +11,7 @@ import { useState } from "react";
 import RecipeModal from "components/modals/RecipeModal";
 
 export interface RecipeCardProps {
+  id: number;
   recipeName: string;
   ingredients: string[];
   instructions: string[];
@@ -18,6 +19,7 @@ export interface RecipeCardProps {
 }
 
 const RecipeCardCmp: React.FC<RecipeCardProps> = ({
+  id,
   recipeName,
   ingredients,
   instructions,
@@ -79,6 +81,7 @@ const RecipeCardCmp: React.FC<RecipeCardProps> = ({
         maxWidth={"400px"}
         showCloseIcon={true}
         recipe={{
+          id,
           recipeName,
           ingredients,
           instructions,

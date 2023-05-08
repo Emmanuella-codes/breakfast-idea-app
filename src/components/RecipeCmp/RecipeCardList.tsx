@@ -27,13 +27,14 @@ const RecipeCardList: React.FC<{
         maxW=""
         flexWrap={{ md: "wrap" }}
       >
-        {recipes.slice(startIndex, endIndex).map((recipe) => (
+        {recipes.slice(startIndex, endIndex).map((recipe, idx) => (
           <RecipeCardCmp
-            key={recipe.id}
+            key={idx}
             recipeName={recipe.name}
             ingredients={recipe.ingredients}
             instructions={recipe.instructions}
             cookTime={recipe.cookTime}
+            id={recipe.id}
           />
         ))}
       </Flex>

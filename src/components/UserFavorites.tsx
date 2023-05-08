@@ -54,8 +54,7 @@ const UserFavorites = () => {
           userRecipes
             .slice(0, displayedRecipes)
             .map((recipe: any, idx: number) => {
-              const { recipeName, ingredients, instructions, cookTime, id } =
-                recipe;
+              const { recipeName, id } = recipe;
               return (
                 <Box key={idx} bgColor={"gray.200"} rounded="xl" p={4}>
                   <Text color="#000">{recipeName}</Text>

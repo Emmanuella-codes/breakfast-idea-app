@@ -19,14 +19,16 @@ export const userRecipesSlice = createSlice({
       state: { value: recipesType[] },
       action: PayloadAction<number>
     ) => {
+      state.value.splice(action.payload, 1);
       /* state.value = state.value.filter((recipe) => recipe.id != action.payload); */
-      const index = state.value.findIndex(
+
+      /* This will find the index of the recipe with the id that matches the action.payload and remove it from the state.value array. */
+      /* const index = state.value.findIndex(
         (recipe) => recipe.id === action.payload
       );
       if (index !== -1) {
         state.value.splice(index, 1);
-      }
-      console.log(action.payload);
+      } */
     },
   },
 });

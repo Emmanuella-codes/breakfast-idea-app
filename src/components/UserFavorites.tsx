@@ -29,8 +29,8 @@ const UserFavorites = () => {
     setDisplayedRecipes(displayedRecipes + 6);
   };
 
-  const handleDeleteRecipe = (id: number) => {
-    dispatch(deleteRecipes(id));
+  const handleDeleteRecipe = (idx: number) => {
+    dispatch(deleteRecipes(idx));
     toast({
       status: "success",
       description: "Recipe deleted successfully",
@@ -47,17 +47,23 @@ const UserFavorites = () => {
       <Flex
         flexDir={{ base: "column", md: "row" }}
         gap={3}
-        w="80%"
+        w="full"
         flexWrap="wrap"
       >
         {userRecipes?.length > 0 &&
           userRecipes
             .slice(0, displayedRecipes)
             .map((recipe: any, idx: number) => {
-              const { recipeName, id } = recipe;
+              /* const { recipeName, id } = recipe; */
               return (
-                <Box key={idx} bgColor={"gray.200"} rounded="xl" p={4}>
-                  <Text color="#000">{recipeName}</Text>
+                <Box
+                  key={idx}
+                  bgColor={"gray.200"}
+                  rounded="xl"
+                  p={4}
+                  w={{ base: "80%", md: "30%" }}
+                >
+                  <Text color="#000">{recipe.recipeName}</Text>
                   <Flex justifyContent={"space-between"} gap={3} my={4}>
                     <Button
                       w={"full"}
@@ -112,8 +118,9 @@ const UserFavorites = () => {
                     yesText={"YES, DELETE"}
                     noText={"CANCEL"}
                     yesAction={() => {
+                      console.log(idx);
                       console.log(recipe.id);
-                      handleDeleteRecipe(id);
+                      handleDeleteRecipe(idx - 1);
                     }}
                   />
                 </Box>

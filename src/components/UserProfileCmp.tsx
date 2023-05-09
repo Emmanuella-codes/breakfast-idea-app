@@ -36,7 +36,7 @@ const UserProfileCmp = () => {
     ingredients: [],
     instructions: [],
     cookTime: "",
-    id: 0,
+    id: 0
   });
 
   const auth = getAuth();

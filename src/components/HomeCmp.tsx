@@ -75,7 +75,7 @@ const HomeCmp = () => {
             fontWeight="700"
             fontFamily={"Overpass"}
           >
-            WITH A FREE ACCOUNT, YOU CAN GENERATE AND SAVE YOUR FAVORITE
+            LOGIN TO GENERATE AND SAVE YOUR FAVORITE
             RECIPES!
           </Text>
         </Stack>

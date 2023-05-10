@@ -118,7 +118,7 @@ const UserFavorites = () => {
                     yesText={"YES, DELETE"}
                     noText={"CANCEL"}
                     yesAction={() => {
-                      console.log(idx);
+                      console.log(idx - 1);
                       console.log(recipe.id);
                       handleDeleteRecipe(idx - 1);
                     }}

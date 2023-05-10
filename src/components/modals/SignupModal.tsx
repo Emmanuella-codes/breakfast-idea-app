@@ -8,6 +8,7 @@ import {
   FormLabel,
   Input,
   useToast,
+  Link,
 } from "@chakra-ui/react";
 import ModalCmp from "./ModalCmp";
 import "firebase/auth";
@@ -23,6 +24,7 @@ import { useFormik } from "formik";
 import { initFirebase } from "../../../pages/_app";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import LoginModal from "./LoginModal";
 
 const ActionModal: React.FC<{
   isOpen: boolean;
@@ -53,6 +55,13 @@ const ActionModal: React.FC<{
   const [userDetails, setUserDetails] = useState(null);
   // page loading state
   /* const [pageLoading, setPageLoading] = useState(false); */
+
+  const [showLoginModal, setShowLoginModal] = useState(false);
+
+  const handleLoginModal = () => {
+    setShowLoginModal(true);
+  };
+
   const validationSchema = yup.object().shape(FORMVALIDATOR);
   initFirebase();
   const auth = getAuth();
@@ -155,11 +164,13 @@ const ActionModal: React.FC<{
           >
             {actionDesc}
           </Text>
-          <>
+          <Box mt={3}>
             <form onSubmit={formik.handleSubmit}>
               <Stack spacing={4}>
                 <FormControl id="firstname">
-                  <FormLabel htmlFor="firstname">Firstname</FormLabel>
+                  <FormLabel htmlFor="firstname" color="#fff">
+                    Firstname
+                  </FormLabel>
                   <Input
                     id="firstname"
                     type="firstname"
@@ -169,7 +180,9 @@ const ActionModal: React.FC<{
                   />
                 </FormControl>
                 <FormControl id="email">
-                  <FormLabel htmlFor="email">Email address</FormLabel>
+                  <FormLabel htmlFor="email" color="#fff">
+                    Email
+                  </FormLabel>
                   <Input
                     id="email"
                     type="email"
@@ -179,7 +192,9 @@ const ActionModal: React.FC<{
                   />
                 </FormControl>
                 <FormControl id="password">
-                  <FormLabel htmlFor="password">Password</FormLabel>
+                  <FormLabel htmlFor="password" color="#fff">
+                    Password
+                  </FormLabel>
                   <Input
                     id="password"
                     type="password"
@@ -227,7 +242,7 @@ const ActionModal: React.FC<{
                 </Box>
               </Flex>
             </form>
-          </>
+          </Box>
         </Box>
       </ModalCmp>
     </>

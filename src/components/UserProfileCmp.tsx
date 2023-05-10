@@ -154,7 +154,7 @@ const UserProfileCmp = () => {
                 }}
                 color="#FFF"
               >
-                SUBMIT
+                SEARCH
               </Box>
             </Flex>
           </form>

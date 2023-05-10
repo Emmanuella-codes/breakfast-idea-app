@@ -84,13 +84,12 @@ const ActionModal: React.FC<{
             const user = userCredential.user;
             updateProfile(auth.currentUser, {
               displayName: values.firstname,
-            })
-              .then(() => {
-                if (auth.currentUser) {
-                  console.log(auth.currentUser.displayName);
-                }
-              })
-              .catch(() => {});
+            }).then(() => {
+              if (auth.currentUser) {
+                router.push("/loader/");
+                console.log(auth.currentUser.displayName);
+              }
+            });
             setSignedIn(true);
             toast({
               status: "success",

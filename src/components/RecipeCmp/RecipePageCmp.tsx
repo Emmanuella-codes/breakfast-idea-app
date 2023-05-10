@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { searchByIngredient } from "utils/getRecipes";
 import { recipes } from "utils/recipeData";
+import PageLoader from "../../../pages/loader";
 
 const RecipePageCmp = () => {
   const [searchedRecipes, setSearchedRecipes] = useState([]);
@@ -16,6 +17,10 @@ const RecipePageCmp = () => {
 
   const prevBtnAction = () => {
     router.back();
+  };
+
+  const pageLoad = () => {
+    router.push("/loader/");
   };
 
   useEffect(() => {
@@ -29,7 +34,7 @@ const RecipePageCmp = () => {
       <Box
         border={"2px solid #000"}
         rounded="3xl"
-        width={{base: "35px", md:"40px"}}
+        width={{ base: "35px", md: "40px" }}
         display="flex"
         justifyContent="center"
         mt="2"
@@ -57,11 +62,7 @@ const RecipePageCmp = () => {
       <Box textAlign="center">
         <Text color={"black"}>Search results for: {ingredient}</Text>
       </Box>
-      {loading ? (
-        <Text>Loading...</Text>
-      ) : (
-        <RecipeCardList recipes={searchedRecipes} />
-      )}
+      {loading ? <PageLoader /> : <RecipeCardList recipes={searchedRecipes} />}
     </Container>
   );
 };

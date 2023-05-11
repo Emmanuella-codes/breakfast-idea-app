@@ -34,13 +34,14 @@ const RecipePageCmp = () => {
       <Box
         border={"2px solid #000"}
         rounded="3xl"
-        width={{ base: "35px", md: "40px" }}
-        display="flex"
-        justifyContent="center"
+        width={{ base: "10%", md: "8%" }}
         mt="2"
         onClick={prevBtnAction}
+        className="back-btn"
+        py={1}
       >
-        <ArrowBackIcon boxSize={8} />
+        <ArrowBackIcon className="back-icon" boxSize={6} />
+        <Text>Back</Text>
       </Box>
       <Stack
         as={Box}

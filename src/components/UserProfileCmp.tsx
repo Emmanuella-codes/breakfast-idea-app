@@ -36,7 +36,7 @@ const UserProfileCmp = () => {
     ingredients: [],
     instructions: [],
     cookTime: "",
-    id: 0
+    id: 0,
   });
 
   const auth = getAuth();
@@ -46,6 +46,7 @@ const UserProfileCmp = () => {
   const handleSignOut = () => {
     signOut(auth)
       .then(() => {
+        router.push("/loader/");
         toast({
           status: "success",
           description: "Logged out successfully",

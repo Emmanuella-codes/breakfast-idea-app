@@ -154,7 +154,7 @@ const LoginModal: React.FC<{
               <Stack spacing={4}>
                 <FormControl id="email">
                   <FormLabel htmlFor="email" color="#fff">
-                    Email address
+                    Email
                   </FormLabel>
                   <Input
                     id="email"

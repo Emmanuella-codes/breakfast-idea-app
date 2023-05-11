@@ -90,6 +90,9 @@ const DeleteModal: React.FC<{
               p="0.8rem 1rem"
               onClick={onRequestClose}
               rounded={"lg"}
+              _hover={{
+                bgColor: "green.500",
+              }}
             >
               {noText}
             </Box>

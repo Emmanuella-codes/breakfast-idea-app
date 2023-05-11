@@ -75,8 +75,7 @@ const HomeCmp = () => {
             fontWeight="700"
             fontFamily={"Overpass"}
           >
-            WITH A FREE ACCOUNT, YOU CAN GENERATE AND SAVE YOUR FAVORITE
-            RECIPES!
+            LOGIN TO GENERATE AND SAVE YOUR FAVORITE RECIPES!
           </Text>
         </Stack>
         <Stack spacing={9} direction={"row"} justifyContent="center">
@@ -141,7 +140,7 @@ const HomeCmp = () => {
                   bgColor: "green.500",
                 }}
               >
-                SUBMIT
+                SEARCH
               </Box>
             </Flex>
           </form>

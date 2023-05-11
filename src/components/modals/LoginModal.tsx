@@ -8,6 +8,7 @@ import {
   Input,
   Button,
   useToast,
+  Link,
 } from "@chakra-ui/react";
 import ModalCmp from "./ModalCmp";
 import "firebase/auth";
@@ -22,6 +23,7 @@ import { FormikProvider } from "formik/dist/FormikContext";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { LOGINVALIDATOR } from "validator/LoginValidator";
+import ActionModal from "./SignupModal";
 
 const LoginModal: React.FC<{
   isOpen: boolean;
@@ -53,6 +55,12 @@ const LoginModal: React.FC<{
   // page loading state
   /* const [pageLoading, setPageLoading] = useState(false); */
 
+  const [showSignupModal, setShowSignupModal] = useState(false);
+
+  const handleSignupModal = () => {
+    setShowSignupModal(true);
+  };
+
   const validationSchema = yup.object().shape(LOGINVALIDATOR);
   const auth = getAuth();
   const router = useRouter();
@@ -67,6 +75,7 @@ const LoginModal: React.FC<{
         await signInWithEmailAndPassword(auth, values.email, values.password)
           .then((userCredential) => {
             const user = userCredential.user;
+            if (auth.currentUser) router.push("/loader/");
             setLoggedIn(true);
             toast({
               status: "success",
@@ -140,11 +149,13 @@ const LoginModal: React.FC<{
           >
             {actionDesc}
           </Text>
-          <>
+          <Box mt={4}>
             <form onSubmit={formik.handleSubmit}>
               <Stack spacing={4}>
                 <FormControl id="email">
-                  <FormLabel htmlFor="email">Email address</FormLabel>
+                  <FormLabel htmlFor="email" color="#fff">
+                    Email
+                  </FormLabel>
                   <Input
                     id="email"
                     type="email"
@@ -155,7 +166,9 @@ const LoginModal: React.FC<{
                   />
                 </FormControl>
                 <FormControl id="password">
-                  <FormLabel htmlFor="password">Password</FormLabel>
+                  <FormLabel htmlFor="password" color="#fff">
+                    Password
+                  </FormLabel>
                   <Input
                     id="password"
                     type="password"
@@ -183,7 +196,7 @@ const LoginModal: React.FC<{
                   isDisabled={formik.isValid ? false : true}
                   onClick={() => formik.handleSubmit}
                   _hover={{
-                    bgColor: "green.500"
+                    bgColor: "green.500",
                   }}
                 >
                   {yesText}
@@ -197,14 +210,14 @@ const LoginModal: React.FC<{
                   p="0.8rem 1rem"
                   onClick={onRequestClose}
                   _hover={{
-                    bgColor: "red.800"
+                    bgColor: "red.800",
                   }}
                 >
                   {noText}
                 </Box>
               </Flex>
             </form>
-          </>
+          </Box>
         </Box>
       </ModalCmp>
     </>

@@ -44,6 +44,7 @@ const SampleRecipes = () => {
     <Flex gap="6" mt={"10"} mx="auto" flexDir={{ base: "column", md: "row" }}>
       {sampleData.map((recipe, index) => (
         <RecipeCardCmp
+          id={index}
           key={index}
           recipeName={recipe.name}
           ingredients={recipe.ingredients}

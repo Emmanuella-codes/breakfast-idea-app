@@ -88,16 +88,16 @@ const ActionModal: React.FC<{
               if (auth.currentUser) {
                 router.push("/loader/");
                 console.log(auth.currentUser.displayName);
+                setSignedIn(true);
+                toast({
+                  status: "success",
+                  description: "Signed in successfully",
+                });
+                router.push({
+                  pathname: "/user/[userID]",
+                  query: { userID: user.uid },
+                });
               }
-            });
-            setSignedIn(true);
-            toast({
-              status: "success",
-              description: "Signed in successfully",
-            });
-            router.push({
-              pathname: "/user/[userID]",
-              query: { userID: user.uid },
             });
           })
           .catch((error) => {
@@ -176,6 +176,7 @@ const ActionModal: React.FC<{
                     name="firstname"
                     onChange={formik.handleChange}
                     value={formik.values.firstname}
+                    color="#FFF"
                   />
                 </FormControl>
                 <FormControl id="email">
@@ -188,6 +189,7 @@ const ActionModal: React.FC<{
                     name="email"
                     onChange={formik.handleChange}
                     value={formik.values.email}
+                    color="#FFF"
                   />
                 </FormControl>
                 <FormControl id="password">
@@ -200,6 +202,7 @@ const ActionModal: React.FC<{
                     name="password"
                     onChange={formik.handleChange}
                     value={formik.values.password}
+                    color="#FFF"
                   />
                 </FormControl>
               </Stack>

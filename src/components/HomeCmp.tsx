@@ -152,7 +152,7 @@ const HomeCmp = () => {
             onRequestClose={() => {
               setOpenLoginModal(false);
             }}
-            maxWidth={"400px"}
+            maxWidth={""}
             actionTitle={"LOGIN"}
             actionDesc={"Login to continue enjoying our cool features"}
             yesText={"LOGIN"}
@@ -165,7 +165,7 @@ const HomeCmp = () => {
             onRequestClose={() => {
               setOpenSignupModal(false);
             }}
-            maxWidth={"400px"}
+            maxWidth={""}
             actionTitle={"SIGNUP"}
             actionDesc={"Sign up to enjoy our cool featues"}
             yesText={"SIGNUP"}

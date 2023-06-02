@@ -19,10 +19,6 @@ const RecipePageCmp = () => {
     router.back();
   };
 
-  const pageLoad = () => {
-    router.push("/loader/");
-  };
-
   useEffect(() => {
     const results = searchByIngredient(ingredient as string);
     setSearchedRecipes(results);
@@ -41,7 +37,7 @@ const RecipePageCmp = () => {
         py={1}
       >
         <ArrowBackIcon className="back-icon" boxSize={6} />
-        <Text>Back</Text>
+        <Text display={{ base: "none", md: "block" }}>Back</Text>
       </Box>
       <Stack
         as={Box}
@@ -63,7 +59,15 @@ const RecipePageCmp = () => {
       <Box textAlign="center">
         <Text color={"black"}>Search results for: {ingredient}</Text>
       </Box>
-      {loading ? <PageLoader /> : <RecipeCardList recipes={searchedRecipes} />}
+      {loading ? (
+        <PageLoader />
+      ) : searchedRecipes.length === 0 ? (
+        <Text textAlign="center" mt="4" fontWeight="bold">
+          No search result for: {ingredient}
+        </Text>
+      ) : (
+        <RecipeCardList recipes={searchedRecipes} />
+      )}
     </Container>
   );
 };

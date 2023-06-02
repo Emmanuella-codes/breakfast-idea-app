@@ -78,7 +78,7 @@ const RecipeCardCmp: React.FC<RecipeCardProps> = ({
         onRequestClose={() => {
           setShowModal(false);
         }}
-        maxWidth={"400px"}
+        maxWidth={""}
         showCloseIcon={true}
         recipe={{
           id,

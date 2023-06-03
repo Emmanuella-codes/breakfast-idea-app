@@ -132,7 +132,7 @@ const HomeCmp = () => {
                 color={"#FFF"}
                 type="submit"
                 isLoading={formik.isSubmitting}
-                isDisabled={formik.isValid ? false : true}
+                isDisabled={!formik.values.searchQuery}
                 onClick={() => {
                   formik.handleSubmit;
                 }}

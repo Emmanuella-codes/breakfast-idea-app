@@ -146,10 +146,8 @@ const UserProfileCmp = () => {
                 p="0.8rem 1rem"
                 type="submit"
                 isLoading={formik.isSubmitting}
-                isDisabled={formik.isValid ? false : true}
-                onClick={() => {
-                  formik.handleSubmit;
-                }}
+                isDisabled={!formik.values.searchQuery}
+                onClick={() => formik.handleSubmit}
                 _hover={{
                   bgColor: "green.600",
                 }}

@@ -75,16 +75,18 @@ const LoginModal: React.FC<{
         await signInWithEmailAndPassword(auth, values.email, values.password)
           .then((userCredential) => {
             const user = userCredential.user;
-            if (auth.currentUser) router.push("/loader/");
-            setLoggedIn(true);
-            toast({
-              status: "success",
-              description: "Logged in successfully",
-            });
-            router.push({
-              pathname: "/user/[userID]",
-              query: { userID: user.uid },
-            });
+            if (auth.currentUser) {
+              router.push("/loader/");
+              setLoggedIn(true);
+              toast({
+                status: "success",
+                description: "Logged in successfully",
+              });
+              router.push({
+                pathname: "/user/[userID]",
+                query: { userID: user.uid },
+              });
+            }
           })
           .catch((error) => {
             const errorCode = error.code;

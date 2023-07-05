@@ -1,14 +1,12 @@
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
-import firebase from "firebase/app";
 import "../styles/loader.css";
 import "../styles/button.css";
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getFirestore } from "firebase/firestore";
 import "firebase/auth";
-import "firebase/firestore";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { store, persistor } from "../src/store/index";
@@ -33,15 +31,7 @@ export const initFirebase = () => {
   return firebaseAppSetup;
 };
 
-/* const colors = {
-  brand: {
-    900: '#1a365d',
-    800: '#153e75',
-    700: '#2a69ac',
-  },
-}
 
-const theme = extendTheme({ colors }) */
 
 const App: React.FC<AppProps> = ({ Component, pageProps }) => {
   return (

@@ -9,15 +9,11 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import ModalCmp from "./ModalCmp";
-import RecipeCardCmp, {
-  RecipeCardProps,
-} from "components/RecipeCmp/RecipeCardCmp";
+import { RecipeCardProps } from "components/RecipeCmp/RecipeCardCmp";
 import { TfiAlarmClock } from "react-icons/tfi";
 import { useRouter } from "next/router";
-import { db } from "../../../pages/_app";
-import { collection, getDoc, doc, setDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { addRecipes } from "store/UserRecipes";
 
 const RecipeModal: React.FC<{
@@ -44,8 +40,8 @@ const RecipeModal: React.FC<{
   const userId = router.query.userID;
 
   const saveRecipe = (recipe: any) => {
-    dispatch(addRecipes(recipe))
-    setIsSaved(true)
+    dispatch(addRecipes(recipe));
+    setIsSaved(true);
   };
 
   /* const userToken = localStorage. */

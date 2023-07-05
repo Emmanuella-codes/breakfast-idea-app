@@ -1,5 +1,5 @@
 import { Flex } from "@chakra-ui/react";
-import Loader from "components/AppLoader";
+import Loader from "./index";
 
 const PageLoader = () => (
   <Flex

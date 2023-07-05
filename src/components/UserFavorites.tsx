@@ -29,8 +29,8 @@ const UserFavorites = () => {
     setDisplayedRecipes(displayedRecipes + 6);
   };
 
-  const handleDeleteRecipe = (idx: number) => {
-    dispatch(deleteRecipes(idx));
+  const handleDeleteRecipe = (id: number) => {
+    dispatch(deleteRecipes(id));
     toast({
       status: "success",
       description: "Recipe deleted successfully",
@@ -120,7 +120,7 @@ const UserFavorites = () => {
                     yesAction={() => {
                       console.log(idx);
                       console.log(recipe.id);
-                      handleDeleteRecipe(idx);
+                      handleDeleteRecipe(recipe.id);
                     }}
                   />
                 </Box>

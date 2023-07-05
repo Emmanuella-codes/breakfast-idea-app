@@ -8,10 +8,8 @@ import {
   Input,
   Button,
   useToast,
-  Link,
 } from "@chakra-ui/react";
 import ModalCmp from "./ModalCmp";
-import "firebase/auth";
 import * as yup from "yup";
 import {
   getAuth,
@@ -19,11 +17,9 @@ import {
   onAuthStateChanged,
 } from "firebase/auth";
 import { useFormik } from "formik";
-import { FormikProvider } from "formik/dist/FormikContext";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { LOGINVALIDATOR } from "validator/LoginValidator";
-import ActionModal from "./SignupModal";
 
 const LoginModal: React.FC<{
   isOpen: boolean;
@@ -52,14 +48,6 @@ const LoginModal: React.FC<{
   });
   const [loggedIn, setLoggedIn] = useState(false);
   const [userDetails, setUserDetails] = useState(null);
-  // page loading state
-  /* const [pageLoading, setPageLoading] = useState(false); */
-
-  const [showSignupModal, setShowSignupModal] = useState(false);
-
-  const handleSignupModal = () => {
-    setShowSignupModal(true);
-  };
 
   const validationSchema = yup.object().shape(LOGINVALIDATOR);
   const auth = getAuth();
@@ -76,7 +64,6 @@ const LoginModal: React.FC<{
           .then((userCredential) => {
             const user = userCredential.user;
             if (auth.currentUser) {
-              router.push("/loader/");
               setLoggedIn(true);
               toast({
                 status: "success",
@@ -89,7 +76,6 @@ const LoginModal: React.FC<{
             }
           })
           .catch((error) => {
-            const errorCode = error.code;
             const errorMessage = error.message;
             toast({
               status: "error",

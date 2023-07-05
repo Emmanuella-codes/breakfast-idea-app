@@ -8,10 +8,8 @@ import {
   FormLabel,
   Input,
   useToast,
-  Link,
 } from "@chakra-ui/react";
 import ModalCmp from "./ModalCmp";
-import "firebase/auth";
 import * as yup from "yup";
 import { FORMVALIDATOR } from "validator/FormValidator";
 import {
@@ -24,7 +22,6 @@ import { useFormik } from "formik";
 import { initFirebase } from "../../../pages/_app";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import LoginModal from "./LoginModal";
 
 const ActionModal: React.FC<{
   isOpen: boolean;
@@ -53,14 +50,6 @@ const ActionModal: React.FC<{
   });
   const [signedIn, setSignedIn] = useState(false);
   const [userDetails, setUserDetails] = useState(null);
-  // page loading state
-  /* const [pageLoading, setPageLoading] = useState(false); */
-
-  const [showLoginModal, setShowLoginModal] = useState(false);
-
-  const handleLoginModal = () => {
-    setShowLoginModal(true);
-  };
 
   const validationSchema = yup.object().shape(FORMVALIDATOR);
   initFirebase();
@@ -86,7 +75,6 @@ const ActionModal: React.FC<{
               displayName: values.firstname,
             }).then(() => {
               if (auth.currentUser) {
-                router.push("/loader/");
                 console.log(auth.currentUser.displayName);
                 setSignedIn(true);
                 toast({
@@ -101,7 +89,6 @@ const ActionModal: React.FC<{
             });
           })
           .catch((error) => {
-            const errorCode = error.code;
             const errorMessage = error.message;
             toast({
               status: "error",

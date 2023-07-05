@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { searchByIngredient } from "utils/getRecipes";
 import { recipes } from "utils/recipeData";
-import PageLoader from "../../../pages/loader";
+import PageLoader from "components/AppLoader/PageLoader";
 
 const RecipePageCmp = () => {
   const [searchedRecipes, setSearchedRecipes] = useState([]);

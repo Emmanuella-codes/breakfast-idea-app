@@ -1,12 +1,4 @@
-import {
-  Box,
-  Flex,
-  Icon,
-  ListItem,
-  Text,
-  UnorderedList,
-  Button,
-} from "@chakra-ui/react";
+import { Box, ListItem, Text, UnorderedList, Button } from "@chakra-ui/react";
 import { useState } from "react";
 import RecipeModal from "components/modals/RecipeModal";
 

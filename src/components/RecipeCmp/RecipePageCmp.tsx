@@ -5,7 +5,6 @@ import RecipeCardList from "components/RecipeCmp/RecipeCardList";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { searchByIngredient } from "utils/getRecipes";
-import { recipes } from "utils/recipeData";
 import PageLoader from "components/AppLoader/PageLoader";
 
 const RecipePageCmp = () => {
